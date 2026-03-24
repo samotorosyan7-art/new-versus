@@ -1,0 +1,148 @@
+{
+  "Nav": {
+    "home": "Home",
+    "philosophy": "Philosophy",
+    "practiceAreas": "Practice Areas",
+    "insights": "Insights",
+    "contact": "Contact"
+  },
+  "Hero": {
+    "overline": "Attorney · Yerevan, Armenia",
+    "name": "Vache Simonyan — Attorney at Law",
+    "versus": "— versus uncertainty",
+    "tagline": "Uncompromising advocacy at the intersection of business law, litigation, and strategic advisory. Where your adversary meets their match.",
+    "cta": "Begin consultation",
+    "scroll": "Scroll"
+  },
+  "Philosophy": {
+    "label": "The person",
+    "body1": "Born from a tradition of principled argumentation, Vache brings a decade of precision legal thinking to every matter. Not a generalist. A strategist — one who studies the full battlefield before the first move is made.",
+    "education": "Yerevan State University of Law · Bar of Armenia · Admitted 2014",
+    "strategyLabel": "The strategy",
+    "versusWord": "Ver·Sus",
+    "versusSub": "“Against” — from Latin. In every legal conflict, there is a versus. Vache's name carries it. His method embodies it.",
+    "body2": "Every case is a contest of preparation, framing, and resolve. The question is never if a position can be argued — but how precisely it can be constructed, and how relentlessly it can be defended."
+  },
+  "Services": {
+    "label": "Practice areas",
+    "title": "Strategic Services",
+    "recentOutcomeLabel": "Recent outcome",
+    "items": [
+      {
+        "num": "01",
+        "title": "Commercial Litigation",
+        "desc": "High-stakes dispute resolution for businesses in Armenia and cross-border contexts. From breach of contract to shareholder conflicts.",
+        "outcome": "Secured full damages recovery in a ₽47M contract dispute — opposing counsel settled on day two of trial."
+      },
+      {
+        "num": "02",
+        "title": "Corporate Advisory",
+        "desc": "Formation, governance, M&A structuring, and ongoing strategic counsel for founders and institutional clients.",
+        "outcome": "Restructured holding group across three jurisdictions — zero tax exposure, full compliance, 90-day execution."
+      },
+      {
+        "num": "03",
+        "title": "Real Estate & Property",
+        "desc": "Transactional due diligence, title disputes, development agreements, and regulatory clearance for Armenian property matters.",
+        "outcome": "Cleared a contested title on a Yerevan commercial property that had been in dispute for eleven years."
+      },
+      {
+        "num": "04",
+        "title": "Contract Architecture",
+        "desc": "Drafting, review, and negotiation of complex agreements — built to withstand pressure, not just pass a desk review.",
+        "outcome": "Renegotiated a vendor agreement saving client $220K annually — completed before deadline with no relationship damage."
+      },
+      {
+        "num": "05",
+        "title": "Regulatory & Compliance",
+        "desc": "Navigating Armenian regulatory frameworks for fintech, media, and foreign-invested enterprises.",
+        "outcome": "Obtained operating license for a fintech startup in 38 days — half the standard processing time."
+      },
+      {
+        "num": "06",
+        "title": "International Arbitration",
+        "desc": "Representation in ICC, LCIA, and ad hoc proceedings. Cross-border expertise with deep local knowledge.",
+        "outcome": "Led arbitration defense against a European claimant — award in client's favor, full costs recovered."
+      }
+    ]
+  },
+  "Ticker": {
+    "items": [
+      { "label": "Business Law", "sub": "Precision at every stage" },
+      { "label": "Versus Uncertainty", "sub": "Strategy before action" },
+      { "label": "Litigation", "sub": "Prepared. Relentless. Precise." },
+      { "label": "Armenia · CIS · International", "sub": "Borders are detail, not obstacles" },
+      { "label": "Advisory", "sub": "Clarity under complexity" },
+      { "label": "Vache Simonyan", "sub": "Your adversary meets their match" }
+    ]
+  },
+  "IntakeForm": {
+    "label": "Start here",
+    "question": "What are we fighting today?",
+    "sub": "No forms. No friction. A brief conversation to understand your situation — so when we speak, we're already aligned.",
+    "selectMatter": "Select your matter",
+    "continue": "Continue",
+    "back": "Back",
+    "startOver": "Start over",
+    "received": "Received.",
+    "confirmation": "Vache will review your matter personally and reach out within 24 hours. Expect directness, not boilerplate.",
+    "placeholderDesc": "Describe your situation briefly",
+    "placeholderName": "Your name",
+    "placeholderEmail": "Email address",
+    "placeholderPhone": "Phone number",
+    "searchCountry": "Search country...",
+    "categories": {
+      "business": "Business & Corporate",
+      "litigation": "Litigation & Dispute",
+      "advisory": "Advisory & Compliance"
+    }
+  },
+  "Archive": {
+    "label": "Thought archive",
+    "title": "Strategic Insights",
+    "items": [
+      {
+        "tag": "Strategy",
+        "title": "Why Most Business Contracts Fail Before They're Signed",
+        "date": "March 2024",
+        "excerpt": "Legal risk is often mistaken for administrative friction. True contract architecture anticipates the divorce before the marriage.",
+        "isFeatured": true
+      },
+      {
+        "tag": "Litigation",
+        "title": "The Anatomy of a Winnable Case",
+        "date": "February 2024",
+        "excerpt": "Success in court is 90% framing. How we define the conflict is how we win it.",
+        "isFeatured": false
+      },
+      {
+        "tag": "Corporate",
+        "title": "Structuring for Conflict Before It Arrives",
+        "date": "January 2024",
+        "excerpt": "Governance is about decision-making during crisis, not just compliance during peace.",
+        "isFeatured": false
+      },
+      {
+        "tag": "Investment",
+        "title": "What Foreign Investors Miss About Armenian Law",
+        "date": "December 2023",
+        "excerpt": "Local nuances in regulatory enforcement can make or break an entry strategy.",
+        "isFeatured": false
+      },
+      {
+        "tag": "Resolution",
+        "title": "When to Settle, When to Fight: A Framework",
+        "date": "November 2023",
+        "excerpt": "The cost of justice is not just financial; it's opportunity cost. Know when the war is worth the resources.",
+        "isFeatured": false
+      }
+    ]
+  },
+  "Footer": {
+    "tagline": "Precision legal strategy for those who can't afford anything less.",
+    "copyright": "© {year} Vache Simonyan. All rights reserved.",
+    "address": "Yerevan, Armenia",
+    "phone": "+374 (00) 00 00 00",
+    "email": "vache@example.com"
+  }
+}
