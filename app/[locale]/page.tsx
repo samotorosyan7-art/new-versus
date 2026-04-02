@@ -1,4 +1,5 @@
 import Nav from '@/components/Nav';
+import { Link } from '@/navigation';
 import Hero from '@/components/Hero';
 import Protocol from '@/components/Protocol';
 import Services from '@/components/Services';
@@ -26,7 +27,7 @@ export default async function Home({
         <BlogGrid locale={locale} />
       </main>
       <Footer />
-      <a href="/contact" className="float-btn">Begin Consultation</a>
+      <Link href="/contact" className="float-btn">Begin Consultation</Link>
     </>
   );
 }

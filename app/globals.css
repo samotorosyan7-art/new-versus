@@ -221,8 +221,6 @@ nav {
   object-fit: contain;
   margin-top: 25px;
   transition: transform 0.4s var(--ease);
-  /* Invert filter is removed via Next.js usage generally or handled via image swap, keeping simple for now assuming dark logo is available or we filter it */
-  filter: invert(1);
 }
 
 .nav-logo:hover .logo-img {
