@@ -11,6 +11,13 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
+    // In production (Vercel), filesystem is read-only. We shouldn't try to write to it.
+    if (process.env.NODE_ENV === 'production' && !process.env.VERCEL_URL?.includes('localhost')) {
+      return NextResponse.json({ 
+        error: 'Saving is disabled in the production environment. Please use the admin panel locally for persistent changes.' 
+      }, { status: 403 });
+    }
+
     const slug = title
       .toLowerCase()
       .trim()
