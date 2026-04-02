@@ -8,6 +8,7 @@ export default function Nav() {
   const [open, setOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const t = useTranslations('Nav');
   const locale = useLocale();
   const pathname = usePathname();
@@ -36,8 +37,18 @@ export default function Nav() {
         setLangOpen(false);
       }
     };
+
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 40);
+    };
+
     document.addEventListener('click', handleClick);
-    return () => document.removeEventListener('click', handleClick);
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      document.removeEventListener('click', handleClick);
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   // Close mobile menu on navigation
@@ -47,7 +58,7 @@ export default function Nav() {
 
   return (
     <>
-      <nav>
+      <nav className={scrolled ? 'scrolled' : ''}>
         {/* Left Links */}
         <div className="nav-desktop-links nav-left">
           <Link href="/protocol">{t('protocol')}</Link>
