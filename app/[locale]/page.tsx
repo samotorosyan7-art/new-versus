@@ -4,12 +4,15 @@ import Protocol from '@/components/Protocol';
 import Services from '@/components/Services';
 import Ticker from '@/components/Ticker';
 import IntakeForm from '@/components/IntakeForm';
-import Archive from '@/components/Archive';
+import BlogGrid from '@/components/BlogGrid';
 import Footer from '@/components/Footer';
-import { useTranslations } from 'next-intl';
 
-export default function Home() {
-  const tHero = useTranslations('Hero');
+export default async function Home({
+  params
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
 
   return (
     <>
@@ -20,10 +23,10 @@ export default function Home() {
         <Services />
         <Ticker />
         <IntakeForm />
-        <Archive />
+        <BlogGrid locale={locale} />
       </main>
       <Footer />
-      <a href="#intake" className="float-btn">{tHero('cta')}</a>
+      <a href="/contact" className="float-btn">Begin Consultation</a>
     </>
   );
 }

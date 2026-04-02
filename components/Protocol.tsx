@@ -37,58 +37,7 @@ export default function Protocol() {
         </div>
       </div>
 
-      <style jsx>{`
-        .protocol-section {
-          padding: 120px 72px;
-          border-top: 1px solid var(--border);
-        }
-        .protocol-intro {
-          margin-bottom: 80px;
-          max-width: 600px;
-        }
-        .protocol-sub {
-          font-family: var(--font-cormorant), serif;
-          font-size: 1.8rem;
-          font-style: italic;
-          line-height: 1.4;
-          color: var(--bone);
-          opacity: 0.8;
-        }
-        .protocol-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 48px;
-        }
-        .protocol-phase {
-          position: relative;
-          padding-top: 40px;
-          border-top: 1px solid var(--border);
-        }
-        .phase-num {
-          font-family: var(--font-cormorant), serif;
-          font-size: 3rem;
-          font-weight: 300;
-          color: var(--copper);
-          opacity: 0.3;
-          margin-bottom: 20px;
-        }
-        .phase-title {
-          font-family: var(--font-playfair), serif;
-          font-size: 1.5rem;
-          font-weight: 700;
-          margin-bottom: 16px;
-          color: var(--bone);
-        }
-        .phase-desc {
-          font-size: 15px;
-          line-height: 1.8;
-          color: rgba(245,240,232,0.6);
-        }
-        @media (max-width: 1024px) {
-          .protocol-grid { grid-template-columns: 1fr; gap: 60px; }
-          .protocol-section { padding: 80px 40px; }
-        }
-      `}</style>
+
     </section>
   );
 }

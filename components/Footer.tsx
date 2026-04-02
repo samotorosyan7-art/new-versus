@@ -26,7 +26,6 @@ export default function Footer() {
         setStatus('error');
       }
     } catch (e) {
-      console.error(e);
       setStatus('error');
     }
   };
@@ -36,7 +35,7 @@ export default function Footer() {
       <footer>
         <div className="footer-brand reveal">
           <div className="footer-logo">
-            <span style={{ color: 'var(--copper)' }}>V</span><span style={{ color: 'var(--copper)' }}>S</span> Law
+            <span style={{ color: 'var(--accent)' }}>V</span><span style={{ color: 'var(--accent)' }}>S</span> Law
           </div>
           <p className="footer-tagline">
             {t('tagline')}
@@ -55,7 +54,7 @@ export default function Footer() {
           <p className="footer-col-title">{t('newsletterTitle')}</p>
           <p className="footer-col-desc">{t('newsletterSub')}</p>
           {status === 'success' ? (
-            <p className="footer-col-desc" style={{ color: 'var(--copper)' }}>Thank you for subscribing.</p>
+            <p className="footer-col-desc" style={{ color: 'var(--accent)' }}>Thank you for subscribing.</p>
           ) : (
             <form className="newsletter-form" onSubmit={handleNewsletterSubmit}>
               <input 
@@ -105,49 +104,7 @@ export default function Footer() {
           Yerevan · Armenia · <a href="#">Privacy</a>
         </span>
       </div>
-      <style jsx>{`
-        .footer-col-desc {
-          font-size: 13px;
-          line-height: 1.5;
-          color: rgba(245,240,232,0.5);
-          margin-bottom: 20px;
-          max-width: 250px;
-        }
-        .newsletter-form {
-          display: flex;
-          gap: 8px;
-        }
-        .newsletter-form input {
-          background: rgba(255,255,255,0.03);
-          border: 1px solid var(--border);
-          padding: 10px 16px;
-          color: var(--bone);
-          font-size: 13px;
-          width: 100%;
-          outline: none;
-        }
-        .newsletter-form input:focus { border-color: var(--copper); }
-        .newsletter-form button {
-          background: var(--copper);
-          color: var(--charcoal);
-          border: none;
-          padding: 0 16px;
-          font-weight: 700;
-          cursor: pointer;
-        }
-        @media (max-width: 1024px) {
-          .newsletter-form { max-width: 300px; }
-        }
-        .footer-contact-link {
-          color: rgba(245,240,232,0.55);
-          text-decoration: none;
-          display: block;
-          transition: color 0.3s ease;
-        }
-        .footer-contact-link:hover {
-          color: var(--copper);
-        }
-      `}</style>
+
     </>
   );
 }

@@ -10,9 +10,10 @@
     "overline": "Attorney · Yerevan, Armenia",
     "name": "Vache Simonyan — Attorney at Law",
     "versus": "— versus uncertainty",
-    "tagline": "Uncompromising advocacy at the intersection of business law, litigation, and strategic advisory. Where your adversary meets their match.",
+    "tagline": "I am Vache Simonyan, a legal strategist based in Yerevan. I believe that in business, as in litigation, clarity is power. I partner with founders and enterprises to navigate complex regulatory landscapes, protect assets, and dismantle uncertainty with absolute precision.",
     "cta": "Begin consultation",
-    "scroll": "Scroll"
+    "scroll": "Scroll",
+    "insights": "Strategic Insights"
   },
   "Protocol": {
     "label": "The methodology",
@@ -38,31 +39,31 @@
     "items": [
       {
         "num": "01",
-        "slug": "commercial-litigation",
-        "title": "Commercial Litigation",
-        "desc": "High-stakes dispute resolution for businesses in Armenia and cross-border contexts. From breach of contract to shareholder conflicts.",
-        "outcome": "Secured full damages recovery in a ₽47M contract dispute — opposing counsel settled on day two of trial."
+        "slug": "pre-trial-representation",
+        "title": "Pre-Trial Representation",
+        "desc": "Immediate legal intervention during arrests, interrogations, and suspect interviews—ensuring absolute adherence to constitutional rights.",
+        "outcome": "Intervened during preliminary investigation preventing the formalization of a self-incriminating statement."
       },
       {
         "num": "02",
-        "slug": "corporate-advisory",
-        "title": "Corporate Advisory",
-        "desc": "Formation, governance, M&A structuring, and ongoing strategic counsel for founders and institutional clients.",
-        "outcome": "Restructured holding group across three jurisdictions — zero tax exposure, full compliance, 90-day execution."
+        "slug": "preventive-measures",
+        "title": "Preventive Measures & Bail",
+        "desc": "Aggressively contesting prosecutorial motions for pre-trial arrest and securing alternative preventive measures like bail or house arrest.",
+        "outcome": "Dismantled flight-risk argument to secure house arrest over Nubarashen confinement."
       },
       {
         "num": "03",
-        "slug": "real-estate-property",
-        "title": "Real Estate & Property",
-        "desc": "Transactional due diligence, title disputes, development agreements, and regulatory clearance for Armenian property matters.",
-        "outcome": "Cleared a contested title on a Yerevan commercial property that had been in dispute for eleven years."
+        "slug": "white-collar-crimes",
+        "title": "White-Collar & Financial Crimes",
+        "desc": "Strategic defense for corporate executives and officials facing complex allegations of tax evasion, embezzlement, and financial fraud.",
+        "outcome": "Forensic audit evidence presented pre-trial forced the dismissal of systematic tax evasion charges."
       },
       {
         "num": "04",
-        "slug": "contract-architecture",
-        "title": "Contract Architecture",
-        "desc": "Drafting, review, and negotiation of complex agreements — built to withstand pressure, not just pass a desk review.",
-        "outcome": "Renegotiated a vendor agreement saving client $220K annually — completed before deadline with no relationship damage."
+        "slug": "general-criminal-litigation",
+        "title": "General Criminal Litigation",
+        "desc": "Formidable representation through every tier of the judiciary—from the Court of First Instance to the Court of Cassation.",
+        "outcome": "Rigorous cross-examination and evidence suppression resulted in a full acquittal."
       },
       {
         "num": "05",
@@ -176,6 +177,12 @@
         }
       ]
     }
+  },
+  "Blog": {
+    "allPosts": "All Insights",
+    "readMore": "Read →",
+    "backToInsights": "← Back to Insights",
+    "noPostsFound": "No posts found."
   },
   "Footer": {
     "tagline": "Precision legal strategy for those who can't afford anything less.",

@@ -40,6 +40,11 @@ export default function Nav() {
     return () => document.removeEventListener('click', handleClick);
   }, []);
 
+  // Close mobile menu on navigation
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
   return (
     <>
       <nav>

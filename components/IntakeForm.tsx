@@ -128,10 +128,10 @@ export default function IntakeForm() {
       if (res.ok) {
         goToStep(2);
       } else {
-        console.error('Failed to submit the form');
+        // Failed to submit
       }
     } catch (e) {
-      console.error(e);
+      // Error in submission
     } finally {
       setIsLoading(false);
     }

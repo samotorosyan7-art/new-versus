@@ -1,15 +1,21 @@
-import Archive from '@/components/Archive';
 import Nav from '@/components/Nav';
+import BlogGrid from '@/components/BlogGrid';
 import Footer from '@/components/Footer';
 
-export default function InsightsPage() {
+export default async function InsightsPage({
+  params
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+
   return (
-    <main className="subpage">
+    <div className="subpage">
       <Nav />
-      <div style={{ paddingTop: '120px' }}>
-        <Archive />
+      <div style={{ paddingTop: '40px' }}>
+        <BlogGrid locale={locale} />
       </div>
       <Footer />
-    </main>
+    </div>
   );
 }

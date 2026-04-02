@@ -41,13 +41,11 @@ export async function POST(request: Request) {
     });
 
     if (resendData.error) {
-      console.error('Resend API Error:', resendData.error);
       return NextResponse.json({ success: false, error: resendData.error }, { status: 400 });
     }
 
     return NextResponse.json({ success: true, data: resendData });
   } catch (error) {
-    console.error('Resend Exception:', error);
     return NextResponse.json({ success: false, error: 'Failed to send email' }, { status: 500 });
   }
 }

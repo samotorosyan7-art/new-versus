@@ -36,29 +36,7 @@ export default function Services() {
           </Link>
         ))}
       </div>
-      <style jsx>{`
-        .service-link-hint {
-          font-size: 11px;
-          text-transform: uppercase;
-          letter-spacing: 0.1em;
-          color: var(--copper);
-          margin-top: 12px;
-          opacity: 0;
-          transform: translateY(5px);
-          transition: all 0.3s ease;
-        }
-        .service-card:hover .service-link-hint {
-          opacity: 1;
-          transform: translateY(0);
-        }
-        .service-card {
-          text-decoration: none;
-          color: inherit;
-        }
-        .service-card * {
-          color: inherit !important;
-        }
-      `}</style>
+
     </section>
   );
 }
