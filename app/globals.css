@@ -1467,23 +1467,18 @@ footer {
   border-top: 1px solid var(--border);
   padding: 100px 72px;
   display: grid;
-  grid-template-columns: 2fr 1fr 1.5fr 1fr;
+  grid-template-columns: repeat(4, 1fr);
   gap: 64px;
   background: var(--bg);
 }
 
 .footer-logo {
-  font-family: var(--font-playfair), serif;
-  font-size: 1.8rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  margin-bottom: 20px;
-  color: var(--text);
+  display: block;
+  margin-bottom: 24px;
 }
 
-.footer-logo span {
-  color: var(--accent);
-  font-style: italic;
+.footer-logo img {
+  object-fit: contain;
 }
 
 .footer-tagline {

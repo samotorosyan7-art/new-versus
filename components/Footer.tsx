@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/navigation';
+import Image from 'next/image';
 
 export default function Footer() {
   const t = useTranslations('Footer');
@@ -35,7 +36,13 @@ export default function Footer() {
       <footer>
         <div className="footer-brand reveal">
           <div className="footer-logo">
-            <span style={{ color: 'var(--accent)' }}>V</span><span style={{ color: 'var(--accent)' }}>S</span> Law
+            <Image 
+              src="/logo.png"
+              alt="Vache Simonyan"
+              width={160}
+              height={50}
+              style={{ height: 'auto', width: 'auto', maxWidth: '160px' }}
+            />
           </div>
           <p className="footer-tagline">
             {t('tagline')}
