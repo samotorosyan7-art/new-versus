@@ -128,7 +128,7 @@ export default function IntakeForm() {
       if (res.ok) {
         goToStep(2);
       } else {
-        // Failed to submit
+        // Failed to submit:
       }
     } catch (e) {
       // Error in submission
