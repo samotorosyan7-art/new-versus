@@ -5,3 +5,7 @@ node_modules
 .env.*.local
 *.log
 .DS_Store
+
+# Local push helper & secrets — never commit
+push.sh
+.push.env
