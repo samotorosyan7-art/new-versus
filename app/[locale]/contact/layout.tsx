@@ -1,8 +1,5 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
-import Nav from '@/components/Nav';
-import Footer from '@/components/Footer';
-import Protocol from '@/components/Protocol';
 import { pageMetadata } from '@/lib/seo';
 
 export async function generateMetadata({
@@ -14,18 +11,12 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: 'Meta' });
   return pageMetadata({
     locale,
-    path: '/protocol',
-    title: t('protocol.title'),
-    description: t('protocol.description'),
+    path: '/contact',
+    title: t('contact.title'),
+    description: t('contact.description'),
   });
 }
 
-export default function ProtocolPage() {
-  return (
-    <main className="subpage">
-      <Nav />
-      <Protocol />
-      <Footer />
-    </main>
-  );
+export default function ContactLayout({ children }: { children: React.ReactNode }) {
+  return children;
 }

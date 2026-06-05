@@ -19,10 +19,11 @@ export async function POST(req: Request) {
     const raw = fs.readFileSync(fullPath, 'utf8');
     const { data, content } = matter(raw);
 
-    return NextResponse.json({ 
+    return NextResponse.json({
       title: data.title || '',
       excerpt: data.excerpt || '',
       content: content.trim(),
+      order: typeof data.order === 'number' ? data.order : '',
     });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });

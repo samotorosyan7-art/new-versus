@@ -41,7 +41,7 @@ export default function Hero() {
           </Link>
           <br />
           <Link href="/insights" className="hero-cta-secondary" style={{ marginTop: '16px' }}>
-            {t('insights') || 'Strategic Insights'}
+            {t('insights')}
           </Link>
         </div>
         <div className="hero-scroll-indicator">

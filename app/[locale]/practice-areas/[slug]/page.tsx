@@ -1,6 +1,6 @@
 'use client';
-import { useTranslations } from 'next-intl';
-import { useParams } from 'next/navigation';
+import { useTranslations, useMessages } from 'next-intl';
+import { useParams, notFound } from 'next/navigation';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import { Link } from '@/navigation';
@@ -8,12 +8,15 @@ import { Link } from '@/navigation';
 export default function PracticeAreaDetail() {
   const params = useParams();
   const slug = params.slug as string;
+  const messages = useMessages() as { PracticeAreas?: Record<string, unknown> };
   const t = useTranslations(`PracticeAreas.${slug}`);
   const common = useTranslations('Services');
 
-  // We need to handle the case where the slug might not exist in our translations
-  // next-intl will throw if we try to access a missing namespace, but here we assume slugs are valid
-  
+  // next-intl throws if we read a missing namespace, so 404 on unknown slugs.
+  if (!messages?.PracticeAreas?.[slug]) {
+    notFound();
+  }
+
   return (
     <main className="subpage">
       <Nav />
@@ -71,7 +74,7 @@ export default function PracticeAreaDetail() {
         .practice-detail-container {
           max-width: 1200px;
           margin: 0 auto;
-          padding: 180px 72px 100px;
+          padding: 72px 72px 100px;
         }
         .back-link {
           display: block;
@@ -79,7 +82,7 @@ export default function PracticeAreaDetail() {
           font-size: 14px;
           text-transform: uppercase;
           letter-spacing: 0.1em;
-          color: var(--copper);
+          color: var(--accent);
           text-decoration: none;
         }
         .practice-title {
@@ -88,7 +91,7 @@ export default function PracticeAreaDetail() {
           font-weight: 700;
           line-height: 1.1;
           margin-bottom: 60px;
-          color: var(--bone);
+          color: var(--text);
         }
         .practice-grid {
           display: grid;
@@ -102,19 +105,19 @@ export default function PracticeAreaDetail() {
           font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.2em;
-          color: var(--copper);
+          color: var(--accent);
           margin-bottom: 24px;
         }
         .block-text {
           font-size: 1.25rem;
           line-height: 1.6;
-          color: rgba(245,240,232,0.8);
+          color: var(--text-muted);
         }
         .block-text.highlight {
-          font-family: var(--font-cormorant), serif;
+          font-family: var(--font-playfair), serif;
           font-size: 2rem;
           font-style: italic;
-          color: var(--bone);
+          color: var(--text);
         }
         .faq-list {
           margin-top: 32px;
@@ -129,16 +132,17 @@ export default function PracticeAreaDetail() {
           font-family: var(--font-playfair), serif;
           font-size: 1.4rem;
           margin-bottom: 12px;
-          color: var(--bone);
+          color: var(--text);
         }
         .faq-a {
           font-size: 15px;
           line-height: 1.7;
-          color: rgba(245,240,232,0.6);
+          color: var(--text-muted);
         }
         .sidebar-box {
-          background: rgba(255,255,255,0.03);
+          background: var(--surface);
           border: 1px solid var(--border);
+          border-radius: var(--radius-lg);
           padding: 40px;
           margin-bottom: 40px;
         }
@@ -149,26 +153,35 @@ export default function PracticeAreaDetail() {
         .specialties-list li {
           font-size: 15px;
           padding: 12px 0;
-          border-bottom: 1px solid rgba(255,255,255,0.05);
-          color: var(--bone);
+          border-bottom: 1px solid var(--border);
+          color: var(--text-muted);
         }
         .specialties-list li:last-child { border: none; }
         .sidebar-cta {
           display: block;
-          background: var(--copper);
-          color: var(--charcoal);
+          background: var(--accent);
+          color: #FFFFFF;
           text-align: center;
           padding: 20px;
+          border-radius: var(--radius-md);
           font-weight: 600;
           text-decoration: none;
-          transition: transform 0.3s ease;
+          transition: background 0.3s, transform 0.3s;
         }
-        .sidebar-cta:hover { transform: translateY(-3px); }
+        .sidebar-cta:hover { background: var(--accent-hover); transform: translateY(-3px); }
 
         @media (max-width: 1024px) {
-          .practice-grid { grid-template-columns: 1fr; gap: 60px; }
-          .practice-detail-container { padding: 140px 40px 60px; }
+          .practice-grid { grid-template-columns: 1fr; gap: 48px; }
+          .practice-detail-container { padding: 48px 40px 60px; }
           .practice-title { font-size: 2.8rem; }
+        }
+        @media (max-width: 640px) {
+          .practice-detail-container { padding: 40px 20px 48px; }
+          .practice-title { font-size: 2rem; }
+          .block-text { font-size: 1rem; }
+          .block-text.highlight { font-size: 1.5rem; }
+          .faq-q { font-size: 1.2rem; }
+          .sidebar-box { padding: 28px 24px; }
         }
       `}</style>
     </main>

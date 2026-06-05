@@ -4,7 +4,75 @@
     "protocol": "The Protocol",
     "practiceAreas": "Practice Areas",
     "insights": "Insights",
-    "contact": "Contact"
+    "cases": "Cases",
+    "about": "About",
+    "contact": "Contacts"
+  },
+  "Meta": {
+    "siteName": "Versus Law Firm",
+    "keywords": "attorney Armenia, lawyer Yerevan, litigation, criminal defense, commercial disputes, international arbitration, Vache Simonyan, Versus Law Firm, corporate law Armenia",
+    "home": {
+      "title": "Versus Law Firm — Vache Simonyan, Attorney at Law in Yerevan",
+      "description": "Uncompromising legal strategy in business law, litigation, and international arbitration. Led by attorney Vache Simonyan in Yerevan, Armenia — where your adversary meets their match."
+    },
+    "about": {
+      "title": "About Vache Simonyan",
+      "description": "Founder of Versus Law Firm and attorney at law in Yerevan. Biography, education, credentials, and a look inside a practice built on preparation and relentless execution."
+    },
+    "practiceAreas": {
+      "title": "Practice Areas",
+      "description": "Strategic legal services across criminal defense, commercial litigation, white-collar crime, regulatory compliance, and international arbitration in Armenia and beyond."
+    },
+    "cases": {
+      "title": "Cases",
+      "description": "A record of representative matters resolved by Versus Law Firm — criminal defense, commercial disputes, and arbitration, each won through precision and preparation."
+    },
+    "contact": {
+      "title": "Contact",
+      "description": "Begin a confidential consultation with Versus Law Firm in Yerevan, Armenia. Vache Simonyan reviews every matter personally and responds within 24 hours."
+    },
+    "protocol": {
+      "title": "The Protocol",
+      "description": "Our proprietary method for high-stakes legal conflict — diagnosis, strategy construction, and relentless execution. The outcome is decided before the first move."
+    }
+  },
+  "About": {
+    "label": "About the firm",
+    "title": "Vache Simonyan",
+    "role": "Founder & Attorney at Law",
+    "intro": "A legal strategist based in Yerevan, dedicated to representing founders, executives, and enterprises in their most consequential disputes. Where others see complexity, I find leverage.",
+    "bioTitle": "Biography",
+    "bio": [
+      "Vache Simonyan is the founder of Versus Law Firm, a boutique practice built on a single conviction: in high-stakes legal conflict, the outcome is decided before the first move is made. Over more than a decade of practice, he has represented clients across criminal defense, commercial litigation, and cross-border arbitration.",
+      "His approach blends rigorous preparation with relentless execution. He has intervened at the earliest stages of investigations to protect clients' rights, dismantled prosecutorial arguments to secure release, and led arbitration defenses against international claimants — consistently turning pressure into advantage.",
+      "Beyond the courtroom, Vache advises businesses navigating Armenia's evolving regulatory landscape, from fintech licensing to corporate restructuring. He is known for his directness, his command of detail, and his refusal to accept uncertainty as an outcome."
+    ],
+    "educationTitle": "Education",
+    "education": [
+      { "degree": "LL.M., International Law", "school": "Yerevan State University", "year": "2014" },
+      { "degree": "LL.B., Law", "school": "Yerevan State University", "year": "2012" },
+      { "degree": "Advanced Program in International Arbitration", "school": "Continuing Legal Education", "year": "2016" }
+    ],
+    "credentialsTitle": "Credentials & Memberships",
+    "credentials": [
+      "Member, Chamber of Advocates of the Republic of Armenia",
+      "Licensed Attorney — Criminal & Civil Litigation",
+      "Registered Representative, International Arbitration"
+    ],
+    "languagesTitle": "Languages",
+    "languages": [
+      "Armenian — Native",
+      "Russian — Fluent",
+      "English — Professional"
+    ],
+    "galleryLabel": "Inside the practice",
+    "galleryTitle": "Gallery",
+    "galleryCaptions": [
+      "At the Versus Law Firm offices, Yerevan",
+      "Founder Vache Simonyan",
+      "Strategy and preparation",
+      "Representation at every tier of the judiciary"
+    ]
   },
   "Hero": {
     "overline": "Attorney · Yerevan, Armenia",
@@ -13,7 +81,7 @@
     "tagline": "I am Vache Simonyan, a legal strategist based in Yerevan. I believe that in business, as in litigation, clarity is power. I partner with founders and enterprises to navigate complex regulatory landscapes, protect assets, and dismantle uncertainty with absolute precision.",
     "cta": "Begin consultation",
     "scroll": "Scroll",
-    "insights": "Strategic Insights"
+    "insights": "Selected Cases"
   },
   "Protocol": {
     "label": "The methodology",
@@ -180,9 +248,19 @@
   },
   "Blog": {
     "allPosts": "All Insights",
-    "readMore": "Read →",
-    "backToInsights": "← Back to Insights",
+    "readMore": "Read",
+    "featured": "Featured",
+    "backToInsights": "Back to Insights",
     "noPostsFound": "No posts found."
+  },
+  "Cases": {
+    "label": "Case record",
+    "title": "Selected Cases",
+    "intro": "A record of representative matters — each resolved through preparation, precision, and relentless execution.",
+    "readMore": "View case",
+    "featured": "Featured case",
+    "viewAll": "All cases",
+    "empty": "No cases published yet."
   },
   "Footer": {
     "tagline": "Precision legal strategy for those who can't afford anything less.",
@@ -195,6 +273,46 @@
     "email": "versus.proc@gmail.com"
   },
   "PracticeAreas": {
+    "pre-trial-representation": {
+      "title": "Pre-Trial Representation",
+      "conflict": "The hours after an arrest or summons are decisive. Statements made during interrogation — without counsel present — routinely become the foundation of a conviction.",
+      "versus": "We intervene immediately, at the investigation stage, ensuring every constitutional right is enforced before a single word is recorded against you.",
+      "specialties": ["Arrest & Interrogation Defense", "Suspect & Witness Interviews", "Constitutional Rights Enforcement", "Early-Stage Case Strategy"],
+      "faq": [
+        { "q": "Should I speak to investigators without a lawyer?", "a": "No. Anything said can be formalized as evidence. We ensure you are advised before any statement is recorded." },
+        { "q": "How quickly can you intervene?", "a": "Immediately. Early intervention is the single greatest determinant of the outcome." }
+      ]
+    },
+    "preventive-measures": {
+      "title": "Preventive Measures & Bail",
+      "conflict": "Prosecutors routinely seek pre-trial detention, framing defendants as flight risks to secure confinement long before any verdict is reached.",
+      "versus": "We dismantle the flight-risk narrative with evidence and structure, securing bail or house arrest over pre-trial confinement.",
+      "specialties": ["Bail Applications", "House Arrest Motions", "Contesting Detention", "Appeals of Preventive Measures"],
+      "faq": [
+        { "q": "Can pre-trial detention be avoided?", "a": "Frequently. With a disciplined factual record, alternative measures such as bail or house arrest are achievable." },
+        { "q": "Can a detention ruling be appealed?", "a": "Yes. We challenge preventive-measure rulings at every available instance." }
+      ]
+    },
+    "white-collar-crimes": {
+      "title": "White-Collar & Financial Crimes",
+      "conflict": "Allegations of tax evasion, embezzlement, or fraud against executives are complex, document-heavy, and reputationally devastating.",
+      "versus": "We meet complexity with forensic precision — auditing the evidence, exposing its gaps, and forcing dismissal before trial wherever possible.",
+      "specialties": ["Tax Evasion Defense", "Embezzlement & Fraud", "Forensic Evidence Review", "Corporate Executive Representation"],
+      "faq": [
+        { "q": "Can charges be dropped before trial?", "a": "Yes. Forensic audit evidence presented early can force the dismissal of unfounded charges." },
+        { "q": "Will the matter remain confidential?", "a": "Discretion is central to our handling of every executive matter." }
+      ]
+    },
+    "general-criminal-litigation": {
+      "title": "General Criminal Litigation",
+      "conflict": "A criminal case can advance through every tier of the judiciary. A single procedural error at any level can decide the outcome.",
+      "versus": "We provide formidable representation from the Court of First Instance to the Court of Cassation — rigorous cross-examination, evidence suppression, and relentless appeals.",
+      "specialties": ["Trial Representation", "Cross-Examination", "Evidence Suppression", "Appeals to the Court of Cassation"],
+      "faq": [
+        { "q": "Do you handle appeals?", "a": "Yes — through every tier, up to the Court of Cassation." },
+        { "q": "What is your approach at trial?", "a": "Meticulous preparation and relentless cross-examination to expose every contradiction." }
+      ]
+    },
     "commercial-litigation": {
       "title": "Commercial Litigation",
       "conflict": "Shareholder disputes and breach of contract can paralyze a growing enterprise. In the Armenian market, uncertainty in enforcement often leads to multi-year stagnation.",

@@ -32,11 +32,17 @@ export async function POST(req: Request) {
         date: data.date || '',
         tag: data.tag || '',
         locale: file.match(/\.(en|hy|ru)\.mdx?$/)?.[1] || 'en',
+        order: typeof data.order === 'number' ? data.order : null,
       });
     }
 
-    // Sort newest first
-    posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    // Sort: by manual order first (lower = earlier; unordered last), then newest first
+    posts.sort((a, b) => {
+      const ao = a.order ?? Number.POSITIVE_INFINITY;
+      const bo = b.order ?? Number.POSITIVE_INFINITY;
+      if (ao !== bo) return ao - bo;
+      return new Date(b.date).getTime() - new Date(a.date).getTime();
+    });
 
     return NextResponse.json({ posts });
   } catch (error: any) {

@@ -7,6 +7,7 @@ type PostMeta = {
   date: string;
   tag: string;
   locale: string;
+  order: number | null;
 };
 
 export default function AdminPage() {
@@ -22,6 +23,7 @@ export default function AdminPage() {
   const [title, setTitle] = useState('');
   const [excerpt, setExcerpt] = useState('');
   const [content, setContent] = useState('');
+  const [order, setOrder] = useState('');
   const [locale, setLocale] = useState('en');
   const [status, setStatus] = useState('');
 
@@ -78,6 +80,7 @@ export default function AdminPage() {
         setTitle(data.title);
         setExcerpt(data.excerpt);
         setContent(data.content);
+        setOrder(data.order === 0 || data.order ? String(data.order) : '');
         setLocale(postLocale);
         setEditingFileName(fileName);
         setStatus('Loaded successfully.');
@@ -92,6 +95,7 @@ export default function AdminPage() {
     setTitle('');
     setExcerpt('');
     setContent('');
+    setOrder('');
     setLocale('en');
     setStatus('New article mode.');
   }
@@ -126,8 +130,8 @@ export default function AdminPage() {
       const res = await fetch('/api/admin/save', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          title, excerpt, content, password: pass, locale, oldFileName: editingFileName 
+        body: JSON.stringify({
+          title, excerpt, content, order, password: pass, locale, oldFileName: editingFileName
         }),
       });
       const data = await res.json();
@@ -189,7 +193,7 @@ export default function AdminPage() {
                 style={{ cursor: 'pointer' }}
                 onClick={() => loadPost(post.fileName, post.locale)}
               >
-                <div style={{ fontSize: '10px', color: 'var(--accent)', fontWeight: 'bold', marginBottom: '4px', textTransform: 'uppercase' }}>{post.locale.toUpperCase()} · {post.date}</div>
+                <div style={{ fontSize: '10px', color: 'var(--accent)', fontWeight: 'bold', marginBottom: '4px', textTransform: 'uppercase' }}>{post.locale.toUpperCase()} · {post.date}{post.order !== null ? ` · #${post.order}` : ''}</div>
                 <div style={{ fontWeight: '600', fontSize: '14px', marginBottom: '8px', lineHeight: 1.3 }}>{post.title}</div>
               </div>
               <button 
@@ -233,10 +237,21 @@ export default function AdminPage() {
 
             <div>
               <label style={{ display: 'block', marginBottom: '8px', fontWeight: 'bold', fontSize: '13px' }}>Short Excerpt (shows in grid)</label>
-              <input 
-                required type="text" value={excerpt} onChange={e => setExcerpt(e.target.value)} 
+              <input
+                required type="text" value={excerpt} onChange={e => setExcerpt(e.target.value)}
                 className="intake-input" placeholder="A one sentence summary..." style={{ marginBottom: 0 }}
               />
+            </div>
+
+            <div>
+              <label style={{ display: 'block', marginBottom: '8px', fontWeight: 'bold', fontSize: '13px' }}>Display Order</label>
+              <input
+                type="number" value={order} onChange={e => setOrder(e.target.value)}
+                className="intake-input" placeholder="e.g. 1 — lower numbers appear first" style={{ marginBottom: 0 }}
+              />
+              <p style={{ color: 'var(--text-muted)', fontSize: '12px', marginTop: '6px' }}>
+                Controls the order on the Cases page. Lower numbers appear first; leave blank to fall back to newest-first.
+              </p>
             </div>
 
             <div>

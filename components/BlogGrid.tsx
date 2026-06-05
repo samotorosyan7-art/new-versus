@@ -37,41 +37,50 @@ export default async function BlogGrid({ locale }: BlogGridProps) {
       </div>
 
       <div className="blog-grid reveal">
-        {/* Featured / left column */}
-        <Link href={`/insights/${featured.slug}`} className="blog-card featured">
-          <div className="blog-card-tag">
-            <span className="tag-pill">{featured.tag}</span>
+        {/* Full-width featured */}
+        <Link href={`/insights/${featured.slug}`} className="blog-featured-full">
+          <div className="blog-featured-main">
+            <div className="blog-card-flag">
+              <span className="blog-card-flag-dot" />
+              {t('featured')}
+            </div>
+            <div className="blog-card-tag">
+              <span className="tag-pill">{featured.tag}</span>
+            </div>
+            <h2 className="blog-featured-title">{featured.title}</h2>
+            {featured.excerpt && (
+              <p className="blog-featured-excerpt">{featured.excerpt}</p>
+            )}
           </div>
-          <h2 className="blog-card-title">{featured.title}</h2>
-          {featured.excerpt && (
-            <p className="blog-card-excerpt">{featured.excerpt}</p>
-          )}
-          <div className="blog-card-meta">
+          <div className="blog-featured-side">
             <span className="blog-card-date">{featured.date}</span>
-            <span className="blog-card-arrow">{t('readMore')}</span>
+            <span className="blog-featured-cta">
+              {t('readMore')}
+              <span className="blog-featured-cta-arrow">→</span>
+            </span>
           </div>
         </Link>
 
-        {/* Right column */}
-        <div className="blog-right-col">
-          {rest.map((post: InsightMeta) => (
-            <Link key={post.slug} href={`/insights/${post.slug}`} className="blog-card">
-              <div className="blog-card-tag">
-                <span className="tag-pill">{post.tag}</span>
-              </div>
-              <h3 className="blog-card-title">{post.title}</h3>
-              {post.excerpt && (
-                <p className="blog-card-excerpt" style={{ fontSize: '12px', WebkitLineClamp: 3, display: '-webkit-box', WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
-                  {post.excerpt}
-                </p>
-              )}
-              <div className="blog-card-meta">
-                <span className="blog-card-date">{post.date}</span>
-                <span className="blog-card-arrow">{t('readMore')}</span>
-              </div>
-            </Link>
-          ))}
-        </div>
+        {/* 3 per row */}
+        {rest.length > 0 && (
+          <div className="blog-cards-grid">
+            {rest.map((post: InsightMeta) => (
+              <Link key={post.slug} href={`/insights/${post.slug}`} className="blog-card">
+                <div className="blog-card-tag">
+                  <span className="tag-pill">{post.tag}</span>
+                </div>
+                <h3 className="blog-card-title">{post.title}</h3>
+                {post.excerpt && (
+                  <p className="blog-card-excerpt">{post.excerpt}</p>
+                )}
+                <div className="blog-card-meta">
+                  <span className="blog-card-date">{post.date}</span>
+                  <span className="blog-card-arrow">{t('readMore')}</span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

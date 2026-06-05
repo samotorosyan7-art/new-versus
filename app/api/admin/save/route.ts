@@ -5,7 +5,10 @@ import path from 'path';
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { title, excerpt, content, password, locale = 'en', oldFileName } = body;
+    const { title, excerpt, content, password, locale = 'en', oldFileName, order } = body;
+
+    const parsedOrder = Number(order);
+    const hasOrder = order !== undefined && order !== null && order !== '' && !Number.isNaN(parsedOrder);
 
     if (password !== 'admin1211') {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -32,12 +35,13 @@ export async function POST(req: Request) {
     }
 
     const date = new Date().toISOString().split('T')[0];
+    const orderLine = hasOrder ? `\norder: ${parsedOrder}` : '';
     const mdxContent = `---
 title: "${title}"
 date: "${date}"
 tag: "Article"
 excerpt: "${excerpt}"
-isFeatured: false
+isFeatured: false${orderLine}
 ---
 
 ${content}

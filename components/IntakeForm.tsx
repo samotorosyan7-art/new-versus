@@ -231,13 +231,13 @@ export default function IntakeForm() {
         {/* Step 2 */}
         <div className={`intake-step${step === 2 ? ' active' : ''}`}>
           <div style={{ marginBottom: '24px' }}>
-            <div style={{ width: '48px', height: '48px', border: '1px solid var(--copper)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '24px' }}>
-              <span style={{ color: 'var(--copper)', fontSize: '20px' }}>✓</span>
+            <div style={{ width: '48px', height: '48px', border: '1px solid var(--accent)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '24px' }}>
+              <span style={{ color: 'var(--accent)', fontSize: '20px' }}>✓</span>
             </div>
             <p style={{ fontFamily: "var(--font-playfair), serif", fontSize: '1.4rem', fontWeight: 700, marginBottom: '12px' }}>
               {t('received')}
             </p>
-            <p style={{ fontSize: '14px', lineHeight: 1.8, color: 'rgba(245,240,232,0.6)' }}>
+            <p style={{ fontSize: '14px', lineHeight: 1.8, color: 'var(--text-muted)' }}>
               {t('confirmation')}
             </p>
           </div>

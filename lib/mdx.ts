@@ -12,6 +12,8 @@ export interface InsightMeta {
   tag: string;
   excerpt: string;
   isFeatured?: boolean;
+  /** Manual sort order (lower = first). Configurable from the admin panel. */
+  order?: number;
 }
 
 export interface Insight extends InsightMeta {
@@ -45,11 +47,16 @@ export function getAllInsights(locale: string): InsightMeta[] {
       tag: data.tag ?? 'Insight',
       excerpt: data.excerpt ?? '',
       isFeatured: data.isFeatured ?? false,
+      order: typeof data.order === 'number' ? data.order : undefined,
     });
   }
 
-  // Sort: featured first, then by date descending
+  // Sort: by manual order first (lower = earlier; items without an order go last),
+  // then featured, then by date descending.
   return posts.sort((a, b) => {
+    const ao = a.order ?? Number.POSITIVE_INFINITY;
+    const bo = b.order ?? Number.POSITIVE_INFINITY;
+    if (ao !== bo) return ao - bo;
     if (a.isFeatured && !b.isFeatured) return -1;
     if (!a.isFeatured && b.isFeatured) return 1;
     return new Date(b.date).getTime() - new Date(a.date).getTime();
@@ -76,6 +83,7 @@ export function getInsightBySlug(slug: string, locale: string): Insight | null {
       tag: data.tag ?? 'Insight',
       excerpt: data.excerpt ?? '',
       isFeatured: data.isFeatured ?? false,
+      order: typeof data.order === 'number' ? data.order : undefined,
       content,
     };
   }
@@ -91,6 +99,7 @@ export function getInsightBySlug(slug: string, locale: string): Insight | null {
     tag: data.tag ?? 'Insight',
     excerpt: data.excerpt ?? '',
     isFeatured: data.isFeatured ?? false,
+    order: typeof data.order === 'number' ? data.order : undefined,
     content,
   };
 }

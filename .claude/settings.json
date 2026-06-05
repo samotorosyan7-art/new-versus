@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(:)",
+      "Bash(node -e '\\(async\\(\\)=>{for\\(const l of [\"en\",\"hy\",\"ru\"]\\){await fetch\\(`http://localhost:3005/${l}`\\); await fetch\\(`http://localhost:3005/${l}/insights`\\);}}\\)\\(\\);')",
+      "Bash(node -e '\\(async\\(\\)=>{ *)"
+    ]
+  }
+}

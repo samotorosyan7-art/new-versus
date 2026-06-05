@@ -61,8 +61,8 @@ export default function Nav() {
       <nav className={scrolled ? 'scrolled' : ''}>
         {/* Left Links */}
         <div className="nav-desktop-links nav-left">
-          <Link href="/protocol">{t('protocol')}</Link>
           <Link href="/practice-areas">{t('practiceAreas')}</Link>
+          <Link href="/insights">{t('cases')}</Link>
         </div>
 
         {/* Center Logo */}
@@ -71,8 +71,8 @@ export default function Nav() {
             <Image
               src="/logo.png"
               alt="Vache Simonyan"
-              width={220}
-              height={80}
+              width={300}
+              height={108}
               className="logo-img"
               priority
               quality={100}
@@ -83,7 +83,7 @@ export default function Nav() {
         {/* Right Links & Controls */}
         <div className="nav-controls-group">
           <div className="nav-desktop-links nav-right">
-            <Link href="/insights">{t('insights')}</Link>
+            <Link href="/about">{t('about')}</Link>
             <Link href="/contact">{t('contact')}</Link>
           </div>
 
@@ -133,9 +133,9 @@ export default function Nav() {
       <div className={`menu-overlay${open ? ' open' : ''}`} id="menuOverlay">
         <div className="menu-links">
           <Link href="/" onClick={closeMenu}>{t('home')}</Link>
-          <Link href="/protocol" onClick={closeMenu}>{t('protocol')}</Link>
           <Link href="/practice-areas" onClick={closeMenu}>{t('practiceAreas')}</Link>
-          <Link href="/insights" onClick={closeMenu}>{t('insights')}</Link>
+          <Link href="/insights" onClick={closeMenu}>{t('cases')}</Link>
+          <Link href="/about" onClick={closeMenu}>{t('about')}</Link>
           <Link href="/contact" onClick={closeMenu}>{t('contact')}</Link>
         </div>
       </div>

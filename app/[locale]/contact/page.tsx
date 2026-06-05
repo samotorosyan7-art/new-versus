@@ -10,10 +10,10 @@ export default function ContactPage() {
   return (
     <div className="subpage">
       <Nav />
-      <div style={{ paddingTop: '80px' }}>
+      <div style={{ paddingTop: '64px' }}>
 
         {/* Bento stat cards */}
-        <div style={{ padding: '0 72px 2px' }}>
+        <div className="contact-stats-wrap">
           <div className="contact-stats-grid reveal">
             <a
               href="https://www.google.com/maps/search/?api=1&query=41+Marshal+Baghramyan+Ave,+Yerevan,+Armenia"
