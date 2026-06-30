@@ -16,10 +16,16 @@ export default function AboutPage() {
   const languages = t.raw('languages') as string[];
   const galleryCaptions = t.raw('galleryCaptions') as string[];
 
-  // Drop real photos into /public/gallery and extend this list.
-  // Falls back to the founder portrait so the slider always has content.
-  const slides: GallerySlide[] = galleryCaptions.map((caption) => ({
-    src: '/Vache-Simonyan-scaled.jpg',
+  // Photos live in /public/gallery-images. Mixed orientations (one wide team
+  // shot, two portraits) are handled by the Gallery's contain layout.
+  const galleryImages = [
+    '/gallery-images/NZ5_0715.JPG',
+    '/Vache-Simonyan-scaled.jpg',
+    '/gallery-images/NZ5_0871.JPG',
+    '/gallery-images/NZ5_0876.JPG',
+  ];
+  const slides: GallerySlide[] = galleryCaptions.map((caption, i) => ({
+    src: galleryImages[i % galleryImages.length],
     caption,
   }));
 

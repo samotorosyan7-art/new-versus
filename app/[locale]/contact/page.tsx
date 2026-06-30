@@ -44,8 +44,6 @@ export default function ContactPage() {
           </div>
         </div>
 
-        <IntakeForm />
-
         <section className="contact-map-section reveal">
           <div className="map-container">
             <iframe
@@ -59,6 +57,8 @@ export default function ContactPage() {
             ></iframe>
           </div>
         </section>
+
+        <IntakeForm />
       </div>
       <Footer />
 

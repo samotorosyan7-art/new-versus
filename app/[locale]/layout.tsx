@@ -129,7 +129,7 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} className={`${playfair.variable} ${cormorant.variable} ${dmSans.variable}`} suppressHydrationWarning>
-      <body>
+      <body suppressHydrationWarning>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

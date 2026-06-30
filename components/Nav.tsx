@@ -39,7 +39,8 @@ export default function Nav() {
     };
 
     const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
+      const y = window.scrollY;
+      setScrolled(prev => prev ? y > 10 : y > 60);
     };
 
     document.addEventListener('click', handleClick);

@@ -3,7 +3,6 @@ import { getTranslations } from 'next-intl/server';
 import Nav from '@/components/Nav';
 import { Link } from '@/navigation';
 import Hero from '@/components/Hero';
-import Protocol from '@/components/Protocol';
 import Services from '@/components/Services';
 import Ticker from '@/components/Ticker';
 import IntakeForm from '@/components/IntakeForm';
@@ -39,7 +38,6 @@ export default async function Home({
       <Nav />
       <main>
         <Hero />
-        <Protocol />
         <Services />
         <Ticker />
         <IntakeForm />

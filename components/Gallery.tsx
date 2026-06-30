@@ -70,13 +70,10 @@ export default function Gallery({ slides }: GalleryProps) {
                 src={slide.src}
                 alt={slide.caption || `Gallery image ${i + 1}`}
                 fill
-                sizes="(max-width: 900px) 100vw, 900px"
+                sizes="(max-width: 1320px) 100vw, 1200px"
                 className="gallery-img"
                 priority={i === 0}
               />
-              {slide.caption && (
-                <div className="gallery-caption">{slide.caption}</div>
-              )}
             </div>
           ))}
         </div>

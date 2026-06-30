@@ -51,10 +51,11 @@ export default function Footer() {
         <div className="footer-col reveal reveal-delay-1">
           <p className="footer-col-title">Navigate</p>
           <ul className="footer-links">
-            <li><Link href="/protocol">{tNav('protocol')}</Link></li>
+            <li><Link href="/">{tNav('home')}</Link></li>
             <li><Link href="/practice-areas">{tNav('practiceAreas')}</Link></li>
+            <li><Link href="/insights">{tNav('cases')}</Link></li>
+            <li><Link href="/about">{tNav('about')}</Link></li>
             <li><Link href="/contact">{tNav('contact')}</Link></li>
-            <li><Link href="/insights">{tNav('insights')}</Link></li>
           </ul>
         </div>
         <div className="footer-col reveal reveal-delay-2">

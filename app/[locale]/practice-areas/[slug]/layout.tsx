@@ -12,12 +12,13 @@ export async function generateMetadata({
   try {
     const t = await getTranslations({ locale, namespace: `PracticeAreas.${slug}` });
     const title = t('title');
-    const conflict = t('conflict');
+    const rows = t.raw('rows') as string[];
+    const summary = Array.isArray(rows) && rows.length ? rows[0] : '';
     return pageMetadata({
       locale,
       path: `/practice-areas/${slug}`,
       title,
-      description: conflict.length > 160 ? `${conflict.slice(0, 157).trim()}…` : conflict,
+      description: summary.length > 160 ? `${summary.slice(0, 157).trim()}…` : summary,
     });
   } catch {
     // Unknown slug — let the page handle the 404, but keep metadata sane.

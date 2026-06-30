@@ -103,49 +103,37 @@
   "Services": {
     "label": "Practice areas",
     "title": "Strategic Services",
-    "recentOutcomeLabel": "Recent outcome",
+    "learnMore": "Learn more",
     "items": [
       {
         "num": "01",
-        "slug": "pre-trial-representation",
-        "title": "Pre-Trial Representation",
-        "desc": "Immediate legal intervention during arrests, interrogations, and suspect interviews—ensuring absolute adherence to constitutional rights.",
-        "outcome": "Intervened during preliminary investigation preventing the formalization of a self-incriminating statement."
+        "slug": "criminal-defense",
+        "title": "Criminal Defense",
+        "desc": "Comprehensive legal representation in criminal matters at both the pre-trial and trial stages."
       },
       {
         "num": "02",
-        "slug": "preventive-measures",
-        "title": "Preventive Measures & Bail",
-        "desc": "Aggressively contesting prosecutorial motions for pre-trial arrest and securing alternative preventive measures like bail or house arrest.",
-        "outcome": "Dismantled flight-risk argument to secure house arrest over Nubarashen confinement."
+        "slug": "extradition-international-criminal-law",
+        "title": "Extradition and International Criminal Law",
+        "desc": "Advising and representing individuals facing extradition requests, challenging extradition decisions, and protecting clients against unlawful transfer to foreign jurisdictions."
       },
       {
         "num": "03",
-        "slug": "white-collar-crimes",
-        "title": "White-Collar & Financial Crimes",
-        "desc": "Strategic defense for corporate executives and officials facing complex allegations of tax evasion, embezzlement, and financial fraud.",
-        "outcome": "Forensic audit evidence presented pre-trial forced the dismissal of systematic tax evasion charges."
+        "slug": "interpol-matters",
+        "title": "INTERPOL Matters",
+        "desc": "Comprehensive legal assistance in matters involving INTERPOL Red Notices, Diffusions, and other international alerts."
       },
       {
         "num": "04",
-        "slug": "general-criminal-litigation",
-        "title": "General Criminal Litigation",
-        "desc": "Formidable representation through every tier of the judiciary—from the Court of First Instance to the Court of Cassation.",
-        "outcome": "Rigorous cross-examination and evidence suppression resulted in a full acquittal."
+        "slug": "international-human-rights",
+        "title": "International Human Rights Protection",
+        "desc": "Representation before national and international bodies in matters involving fundamental rights, non-refoulement, asylum, and protection from politically motivated prosecution."
       },
       {
         "num": "05",
-        "slug": "regulatory-compliance",
-        "title": "Regulatory & Compliance",
-        "desc": "Navigating Armenian regulatory frameworks for fintech, media, and foreign-invested enterprises.",
-        "outcome": "Obtained operating license for a fintech startup in 38 days — half the standard processing time."
-      },
-      {
-        "num": "06",
-        "slug": "international-arbitration",
-        "title": "International Arbitration",
-        "desc": "Representation in ICC, LCIA, and ad hoc proceedings. Cross-border expertise with deep local knowledge.",
-        "outcome": "Led arbitration defense against a European claimant — award in client's favor, full costs recovered."
+        "slug": "betting-gaming-law",
+        "title": "Betting and Gaming Law",
+        "desc": "Legal support for betting, gaming, and gambling operators with a particular focus on criminal law risk prevention and regulatory compliance."
       }
     ]
   },
@@ -247,7 +235,8 @@
     }
   },
   "Blog": {
-    "allPosts": "All Insights",
+    "allPosts": "Cases",
+    "sectionTitle": "Before the First Move Is Made",
     "readMore": "Read",
     "featured": "Featured",
     "backToInsights": "Back to Insights",
@@ -273,99 +262,40 @@
     "email": "versus.proc@gmail.com"
   },
   "PracticeAreas": {
-    "pre-trial-representation": {
-      "title": "Pre-Trial Representation",
-      "conflict": "The hours after an arrest or summons are decisive. Statements made during interrogation — without counsel present — routinely become the foundation of a conviction.",
-      "versus": "We intervene immediately, at the investigation stage, ensuring every constitutional right is enforced before a single word is recorded against you.",
-      "specialties": ["Arrest & Interrogation Defense", "Suspect & Witness Interviews", "Constitutional Rights Enforcement", "Early-Stage Case Strategy"],
-      "faq": [
-        { "q": "Should I speak to investigators without a lawyer?", "a": "No. Anything said can be formalized as evidence. We ensure you are advised before any statement is recorded." },
-        { "q": "How quickly can you intervene?", "a": "Immediately. Early intervention is the single greatest determinant of the outcome." }
+    "criminal-defense": {
+      "title": "Criminal Defense",
+      "rows": [
+        "Comprehensive legal representation in criminal matters at both the pre-trial and trial stages. We protect the rights and interests of suspects, accused persons, defendants, witnesses, and victims throughout criminal proceedings.",
+        "Our practice includes strategic defense in complex criminal investigations, representation before investigative authorities, prosecutors, and courts, as well as the development of effective legal strategies aimed at safeguarding our clients’ rights and interests.",
+        "We also represent victims of criminal offenses, including corporate clients, business owners, and organizations that have suffered financial, economic, or reputational harm as a result of criminal conduct. Our team conducts legal assessments, assists in evidence gathering, pursues compensation claims, and ensures effective protection of victims’ rights throughout all stages of the criminal process."
       ]
     },
-    "preventive-measures": {
-      "title": "Preventive Measures & Bail",
-      "conflict": "Prosecutors routinely seek pre-trial detention, framing defendants as flight risks to secure confinement long before any verdict is reached.",
-      "versus": "We dismantle the flight-risk narrative with evidence and structure, securing bail or house arrest over pre-trial confinement.",
-      "specialties": ["Bail Applications", "House Arrest Motions", "Contesting Detention", "Appeals of Preventive Measures"],
-      "faq": [
-        { "q": "Can pre-trial detention be avoided?", "a": "Frequently. With a disciplined factual record, alternative measures such as bail or house arrest are achievable." },
-        { "q": "Can a detention ruling be appealed?", "a": "Yes. We challenge preventive-measure rulings at every available instance." }
+    "extradition-international-criminal-law": {
+      "title": "Extradition and International Criminal Law",
+      "rows": [
+        "Advising and representing individuals facing extradition requests, challenging extradition decisions, and protecting clients against unlawful transfer to foreign jurisdictions.",
+        "Our work includes conducting independent factual investigations, gathering and preserving evidence, interviewing witnesses, analyzing state actions and judicial proceedings, and building comprehensive legal and evidentiary records to substantiate human rights violations. We represent clients in cases involving unlawful detention, politically motivated prosecution, extradition and deportation risks, violations of fair trial guarantees, privacy rights, freedom of expression, property rights, and other fundamental protections under international human rights instruments."
       ]
     },
-    "white-collar-crimes": {
-      "title": "White-Collar & Financial Crimes",
-      "conflict": "Allegations of tax evasion, embezzlement, or fraud against executives are complex, document-heavy, and reputationally devastating.",
-      "versus": "We meet complexity with forensic precision — auditing the evidence, exposing its gaps, and forcing dismissal before trial wherever possible.",
-      "specialties": ["Tax Evasion Defense", "Embezzlement & Fraud", "Forensic Evidence Review", "Corporate Executive Representation"],
-      "faq": [
-        { "q": "Can charges be dropped before trial?", "a": "Yes. Forensic audit evidence presented early can force the dismissal of unfounded charges." },
-        { "q": "Will the matter remain confidential?", "a": "Discretion is central to our handling of every executive matter." }
+    "interpol-matters": {
+      "title": "INTERPOL Matters",
+      "rows": [
+        "Comprehensive legal assistance in matters involving INTERPOL Red Notices, Diffusions, and other international alerts. We represent individuals before the Commission for the Control of INTERPOL’s Files (CCF) and provide strategic advice to clients facing international law enforcement measures.",
+        "Our services include legal assessment of INTERPOL-related risks, analysis of criminal proceedings underlying INTERPOL requests, collection and preservation of evidence, preparation of factual and legal submissions, and the development of comprehensive strategies aimed at preventing, challenging, correcting, or deleting INTERPOL data.",
+        "A critical part of our INTERPOL practice is the preparatory work conducted before any application is submitted to the Commission for the Control of INTERPOL’s Files (CCF). Prior to filing, we carry out a comprehensive legal and factual assessment of the case, identify potential weaknesses, collect and verify supporting evidence, obtain relevant court and administrative documents, and develop a tailored legal strategy designed to maximize the prospects of success.",
+        "Our objective is to ensure that every application is supported by a complete and well-documented evidentiary record, thereby significantly reducing the risk of rejection and increasing the likelihood of obtaining access, correction, or deletion of INTERPOL data."
       ]
     },
-    "general-criminal-litigation": {
-      "title": "General Criminal Litigation",
-      "conflict": "A criminal case can advance through every tier of the judiciary. A single procedural error at any level can decide the outcome.",
-      "versus": "We provide formidable representation from the Court of First Instance to the Court of Cassation — rigorous cross-examination, evidence suppression, and relentless appeals.",
-      "specialties": ["Trial Representation", "Cross-Examination", "Evidence Suppression", "Appeals to the Court of Cassation"],
-      "faq": [
-        { "q": "Do you handle appeals?", "a": "Yes — through every tier, up to the Court of Cassation." },
-        { "q": "What is your approach at trial?", "a": "Meticulous preparation and relentless cross-examination to expose every contradiction." }
+    "international-human-rights": {
+      "title": "International Human Rights Protection",
+      "rows": [
+        "Representation before national and international bodies in matters involving fundamental rights, non-refoulement, asylum, and protection from politically motivated prosecution."
       ]
     },
-    "commercial-litigation": {
-      "title": "Commercial Litigation",
-      "conflict": "Shareholder disputes and breach of contract can paralyze a growing enterprise. In the Armenian market, uncertainty in enforcement often leads to multi-year stagnation.",
-      "versus": "We don’t just litigate; we architect a settlement before the first hearing. Our approach is to define the conflict so precisely that the adversary’s position becomes untenable.",
-      "specialties": ["Interim Measures & Injunctions", "Enforcement of Foreign Judgments", "Shareholder Dispute Resolution", "Debt Recovery Strategies"],
-      "faq": [
-        { "q": "How long does a commercial dispute take in Armenia?", "a": "Direct litigation can take 12-24 months. Our strategy aims for resolution within 6 months through aggressive tactical pressure." },
-        { "q": "Are interim measures effective?", "a": "Yes, if applied with surgical precision to freeze assets before they are moved." }
-      ]
-    },
-    "corporate-advisory": {
-      "title": "Corporate Advisory",
-      "conflict": "Poor governance is a slow-acting poison. Founders often skip the 'rules of the game' in favor of speed, leading to terminal conflict later.",
-      "versus": "We build corporate architectures that anticipate crisis. We structure for conflict so that when it arrives, your position is already fortified.",
-      "specialties": ["M&A Structuring", "Governance Frameworks", "Tax-Efficient Restructuring", "Venture Capital Support"],
-      "faq": [
-        { "q": "What is the best jurisdiction for a holding company?", "a": "It depends on your exit strategy. Armenia offers unique tax incentives for IT and Free Zones that we leverage." }
-      ]
-    },
-    "real-estate-property": {
-      "title": "Real Estate & Property",
-      "conflict": "Property titles in emerging markets can be deceptively fragile. One historical error in a title chain can invalidate a multi-million dollar investment.",
-      "versus": "Exhaustive legal due diligence that goes beyond the certificate. We map the history of every title to eliminate surprises.",
-      "specialties": ["Title Chain Verification", "Development Agreements", "Zoning & Regulatory Clearance", "Commercial Leasing"],
-      "faq": [
-        { "q": "Can foreigners own land in Armenia?", "a": "No, but they can own buildings and have long-term leasehold rights for the land, which is practically identical in use-case." }
-      ]
-    },
-    "contract-architecture": {
-      "title": "Contract Architecture",
-      "conflict": "Standardized templates are administrative friction, not legal protection. They fail exactly when you need them.",
-      "versus": "We draft agreements to withstand pressure. Every clause is a defensive line designed to ensure that if a breach occurs, the resolution is already written in your favor.",
-      "specialties": ["Complex Service Agreements", "Cross-Border Sales", "Licensing & IP Transfers", "Construction Contracts"],
-      "faq": [
-        { "q": "Why not use a standard template?", "a": "Because standard templates don't account for your specific leverage. A custom contract is an offensive weapon." }
-      ]
-    },
-    "regulatory-compliance": {
-      "title": "Regulatory & Compliance",
-      "conflict": "Regulatory landscapes in Armenia change faster than businesses can adapt. Compliance is often mistaken for a checkbox, but it's a license to operate.",
-      "versus": "Proactive navigation. We don't just tell you what the law is; we tell you where it's going and how to stay ahead of the regulator.",
-      "specialties": ["Fintech Licensing", "Data Privacy & GDPR", "Anti-Money Laundering", "Environmental Compliance"],
-      "faq": [
-        { "q": "Is the Central Bank of Armenia startup-friendly?", "a": "Yes, but they demand absolute transparency. We bridge that gap." }
-      ]
-    },
-    "international-arbitration": {
-      "title": "International Arbitration",
-      "conflict": "State courts can be unpredictable for foreign entities. Arbitration is the gold standard for neutrality, but it is expensive and slow if mismanaged.",
-      "versus": "We treat arbitration as a strategic contest. Our goal is to win the proceedings by out-preparing the claimant before the first tribunal meeting.",
-      "specialties": ["ICC & LCIA Representation", "Ad Hoc Proceedings", "Investor-State Disputes", "Arbitral Award Enforcement"],
-      "faq": [
-        { "q": "Is arbitration better than state courts in Armenia?", "a": "For international contracts, absolutely. It ensures a level playing field and enforceable finality." }
+    "betting-gaming-law": {
+      "title": "Betting and Gaming Law",
+      "rows": [
+        "Legal support for betting, gaming, and gambling operators with a particular focus on criminal law risk prevention and regulatory compliance. Advising businesses on the lawful structuring of operations, identifying and mitigating criminal liability risks, developing compliance strategies, and protecting owners, executives, and key personnel from potential criminal prosecution. Providing ongoing legal risk management to ensure the secure and sustainable operation of gaming and betting businesses across multiple jurisdictions."
       ]
     }
   }
