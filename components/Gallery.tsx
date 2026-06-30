@@ -23,17 +23,8 @@ export default function Gallery({ slides }: GalleryProps) {
     [total]
   );
 
-  const prev = useCallback(() => goTo(index - 1), [goTo, index]);
-  const next = useCallback(() => goTo(index + 1), [goTo, index]);
-
-  // Auto-advance
-  useEffect(() => {
-    if (total <= 1) return;
-    const timer = setInterval(() => {
-      setIndex((i) => (i + 1) % total);
-    }, 5000);
-    return () => clearInterval(timer);
-  }, [total]);
+  const prev = useCallback(() => setIndex((i) => ((i - 1) % total + total) % total), [total]);
+  const next = useCallback(() => setIndex((i) => (i + 1) % total), [total]);
 
   // Keyboard navigation
   useEffect(() => {

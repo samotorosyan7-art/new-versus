@@ -77,7 +77,6 @@
   "Hero": {
     "overline": "Attorney · Yerevan, Armenia",
     "name": "Vache Simonyan — Attorney at Law",
-    "versus": "— versus uncertainty",
     "tagline": "I am Vache Simonyan, a legal strategist based in Yerevan. I believe that in business, as in litigation, clarity is power. I partner with founders and enterprises to navigate complex regulatory landscapes, protect assets, and dismantle uncertainty with absolute precision.",
     "cta": "Begin consultation",
     "scroll": "Scroll",
@@ -253,6 +252,11 @@
   },
   "Footer": {
     "tagline": "Precision legal strategy for those who can't afford anything less.",
+    "navigateTitle": "Navigate",
+    "contactTitle": "Contact",
+    "locationLabel": "Location",
+    "emailLabel": "Email",
+    "phoneLabel": "Phone",
     "newsletterTitle": "Quarterly Strategic Briefing",
     "newsletterSub": "Receive high-level insights on the Armenian legal landscape.",
     "newsletterPlaceholder": "Email address",

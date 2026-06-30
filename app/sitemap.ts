@@ -11,7 +11,7 @@ const STATIC_PATHS: Array<{
 }> = [
   { path: '', priority: 1.0, changeFrequency: 'weekly' },
   { path: '/practice-areas', priority: 0.9, changeFrequency: 'monthly' },
-  { path: '/insights', priority: 0.8, changeFrequency: 'weekly' },
+  { path: '/cases', priority: 0.8, changeFrequency: 'weekly' },
   { path: '/about', priority: 0.7, changeFrequency: 'monthly' },
   { path: '/contact', priority: 0.7, changeFrequency: 'yearly' },
   { path: '/protocol', priority: 0.5, changeFrequency: 'yearly' },
@@ -60,7 +60,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Case / insight detail pages
   const insightSlugs = getAllInsightSlugs();
   for (const { slug } of insightSlugs) {
-    const path = `/insights/${slug}`;
+    const path = `/cases/${slug}`;
     for (const locale of locales) {
       entries.push({
         url: `${SITE_URL}/${locale}${path}`,

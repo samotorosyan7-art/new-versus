@@ -39,12 +39,11 @@ export default async function Home({
       <main>
         <Hero />
         <Services />
-        <Ticker />
-        <IntakeForm />
+        {/* <Ticker /> */}
+        {/* <IntakeForm /> */}
         <BlogGrid locale={locale} />
       </main>
       <Footer />
-      <Link href="/contact" className="float-btn">Begin Consultation</Link>
     </>
   );
 }

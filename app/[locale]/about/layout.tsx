@@ -14,7 +14,7 @@ export async function generateMetadata({
     path: '/about',
     title: t('about.title'),
     description: t('about.description'),
-    images: ['/Vache-Simonyan-scaled.jpg'],
+    images: ['/Vache-Simonyan-scaled.png'],
   });
 }
 

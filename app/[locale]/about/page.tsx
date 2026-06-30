@@ -20,7 +20,7 @@ export default function AboutPage() {
   // shot, two portraits) are handled by the Gallery's contain layout.
   const galleryImages = [
     '/gallery-images/NZ5_0715.JPG',
-    '/Vache-Simonyan-scaled.jpg',
+    '/Vache-Simonyan-scaled.png',
     '/gallery-images/NZ5_0871.JPG',
     '/gallery-images/NZ5_0876.JPG',
   ];
@@ -43,7 +43,7 @@ export default function AboutPage() {
         </div>
         <div className="about-hero-img reveal reveal-delay-1">
           <Image
-            src="/Vache-Simonyan-scaled.jpg"
+            src="/Vache-Simonyan-scaled.png"
             alt={t('title')}
             width={520}
             height={680}

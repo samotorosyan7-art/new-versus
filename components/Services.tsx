@@ -11,8 +11,7 @@ export default function Services() {
     <section id="services">
       <div className="section-header reveal">
         <div>
-          <p className="section-label">{t('label')}</p>
-          <h2 className="section-title">{t('title')}</h2>
+          <h2 className="section-label">{t('label')}</h2>
         </div>
       </div>
       <div className="services-grid">

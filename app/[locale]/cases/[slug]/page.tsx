@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return pageMetadata({
     locale,
-    path: `/insights/${slug}`,
+    path: `/cases/${slug}`,
     title: post.title,
     description: post.excerpt || `${post.title} — ${SITE_NAME}`,
     type: 'article',
@@ -57,7 +57,7 @@ export default async function InsightPostPage({ params }: Props) {
       <div style={{ paddingTop: '60px' }}>
         <article className="case-detail">
           <header className="case-detail-header">
-            <Link href="/insights" className="blog-reading-back">
+            <Link href="/cases" className="blog-reading-back">
               ← {t('backToInsights')}
             </Link>
 
@@ -90,7 +90,7 @@ export default async function InsightPostPage({ params }: Props) {
                 <Link href="/contact" className="primary-btn case-file-cta">
                   {th('cta')}
                 </Link>
-                <Link href="/insights" className="case-file-back">
+                <Link href="/cases" className="case-file-back">
                   ← {t('backToInsights')}
                 </Link>
               </div>

@@ -11,10 +11,7 @@ export default function Hero() {
     <section id="hero" className="hero-reversed">
       <div className="hero-text-col">
         <p className="hero-overline">{t('overline')}</p>
-        <h1 className="hero-name">
-          <em>V</em>ache <em>S</em>imonyan
-        </h1>
-        <p className="hero-versus">{t('versus')}</p>
+        <h1 className="hero-name">Vache Simonyan</h1>
         <p className="hero-tagline">{t('tagline')}</p>
         <div className="hero-cta-wrap">
           <Link href="/contact" className="primary-btn">
@@ -30,7 +27,7 @@ export default function Hero() {
           style={{ width: '100%', height: '100%', position: 'relative' }}
         >
           <Image
-            src="/Vache-Simonyan-scaled.jpg"
+            src="/Vache-Simonyan-scaled.png"
             alt={t('name')}
             fill
             style={{ objectFit: 'contain', objectPosition: 'center 15%' }}

@@ -58,7 +58,7 @@ export default function ContactPage() {
           </div>
         </section>
 
-        <IntakeForm />
+        {/* <IntakeForm /> */}
       </div>
       <Footer />
 

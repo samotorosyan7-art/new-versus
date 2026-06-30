@@ -15,8 +15,7 @@ export default async function BlogGrid({ locale }: BlogGridProps) {
       <section id="blog-grid">
         <div className="section-header reveal">
           <div>
-            <p className="section-label">{t('allPosts')}</p>
-            <h2 className="section-title">{t('sectionTitle')}</h2>
+            <h2 className="section-title">{t('allPosts')}</h2>
           </div>
         </div>
         <p style={{ color: 'var(--text-muted)', marginTop: '48px' }}>{t('noPostsFound')}</p>
@@ -28,15 +27,14 @@ export default async function BlogGrid({ locale }: BlogGridProps) {
     <section id="blog-grid">
       <div className="section-header reveal">
         <div>
-          <p className="section-label">{t('allPosts')}</p>
-          <h2 className="section-title">{t('sectionTitle')}</h2>
+          <h2 className="section-label">{t('allPosts')}</h2>
         </div>
       </div>
 
       <div className="blog-grid reveal">
         <div className="blog-cards-grid">
           {posts.map((post: InsightMeta) => (
-            <Link key={post.slug} href={`/insights/${post.slug}`} className="blog-card">
+            <Link key={post.slug} href={`/cases/${post.slug}`} className="blog-card">
               <div className="blog-card-tag">
                 <span className="tag-pill">{post.tag}</span>
               </div>

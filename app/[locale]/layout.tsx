@@ -9,7 +9,6 @@ import '../globals.css';
 const playfair = Playfair_Display({
   subsets: ['latin'],
   weight: ['400', '700', '900'],
-  style: ['normal', 'italic'],
   variable: '--font-playfair',
   display: 'swap',
 });
@@ -17,7 +16,6 @@ const playfair = Playfair_Display({
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
   weight: ['300', '400', '600'],
-  style: ['normal', 'italic'],
   variable: '--font-cormorant',
   display: 'swap',
 });
@@ -107,7 +105,7 @@ export default async function RootLayout({
     description: t('home.description'),
     url: `${SITE_URL}/${locale}`,
     logo: `${SITE_URL}/logo.png`,
-    image: `${SITE_URL}/Vache-Simonyan-scaled.jpg`,
+    image: `${SITE_URL}/Vache-Simonyan-scaled.png`,
     telephone: '+374 94 363 484',
     email: 'versus.proc@gmail.com',
     priceRange: '$$$',

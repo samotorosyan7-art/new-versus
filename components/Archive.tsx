@@ -18,14 +18,13 @@ export default function Archive() {
       <div className="section-header reveal">
         <div>
           <p className="section-label">{t('blog.allPosts')}</p>
-          <h2 className="section-title">{t('blog.sectionTitle')}</h2>
         </div>
       </div>
       <div className="archive-grid reveal">
         {items.map((a, i) => (
           <Link
             key={i}
-            href={a.slug ? `/insights/${a.slug}` : "/insights"}
+            href={a.slug ? `/cases/${a.slug}` : "/cases"}
             className="archive-card"
           >
             <div className="archive-card-content">

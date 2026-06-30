@@ -63,14 +63,14 @@ export default function Nav() {
         {/* Left Links */}
         <div className="nav-desktop-links nav-left">
           <Link href="/practice-areas">{t('practiceAreas')}</Link>
-          <Link href="/insights">{t('cases')}</Link>
+          <Link href="/cases">{t('cases')}</Link>
         </div>
 
         {/* Center Logo */}
         <div className="nav-logo-container">
           <Link href="/" className="nav-logo">
             <Image
-              src="/logo.png"
+              src="/logo.svg"
               alt="Vache Simonyan"
               width={300}
               height={108}
@@ -135,7 +135,7 @@ export default function Nav() {
         <div className="menu-links">
           <Link href="/" onClick={closeMenu}>{t('home')}</Link>
           <Link href="/practice-areas" onClick={closeMenu}>{t('practiceAreas')}</Link>
-          <Link href="/insights" onClick={closeMenu}>{t('cases')}</Link>
+          <Link href="/cases" onClick={closeMenu}>{t('cases')}</Link>
           <Link href="/about" onClick={closeMenu}>{t('about')}</Link>
           <Link href="/contact" onClick={closeMenu}>{t('contact')}</Link>
         </div>

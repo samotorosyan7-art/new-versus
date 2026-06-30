@@ -25,7 +25,7 @@ export default async function CasesGrid({ locale }: CasesGridProps) {
       ) : (
         <div className="cases-list reveal">
           {cases.map((c: InsightMeta, i: number) => (
-            <Link key={c.slug} href={`/insights/${c.slug}`} className="case-row">
+            <Link key={c.slug} href={`/cases/${c.slug}`} className="case-row">
               <span className="case-index">
                 {(i + 1).toString().padStart(2, '0')}
               </span>
