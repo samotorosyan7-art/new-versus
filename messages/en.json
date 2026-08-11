@@ -107,14 +107,14 @@
       {
         "num": "01",
         "slug": "criminal-defense",
-        "title": "Criminal Defense",
-        "desc": "Comprehensive legal representation in criminal matters at both the pre-trial and trial stages."
+        "title": "Criminal Defense and Representation",
+        "desc": "The Firm provides comprehensive legal representation in criminal matters at all stages of criminal proceedings, including the pre-trial investigation and trial."
       },
       {
         "num": "02",
         "slug": "extradition-international-criminal-law",
-        "title": "Extradition and International Criminal Law",
-        "desc": "Advising and representing individuals facing extradition requests, challenging extradition decisions, and protecting clients against unlawful transfer to foreign jurisdictions."
+        "title": "Extradition representation and Human rights protection",
+        "desc": "We advise and represent individuals who are the subject of extradition requests, challenge extradition decisions, and protect clients against unlawful surrender to foreign jurisdictions."
       },
       {
         "num": "03",
@@ -126,13 +126,13 @@
         "num": "04",
         "slug": "international-human-rights",
         "title": "International Human Rights Protection",
-        "desc": "Representation before national and international bodies in matters involving fundamental rights, non-refoulement, asylum, and protection from politically motivated prosecution."
+        "desc": "We represent individuals whose fundamental rights have been violated by state authorities, providing legal representation before national courts, international human rights bodies, and regional mechanisms."
       },
       {
         "num": "05",
         "slug": "betting-gaming-law",
         "title": "Betting and Gaming Law",
-        "desc": "Legal support for betting, gaming, and gambling operators with a particular focus on criminal law risk prevention and regulatory compliance."
+        "desc": "Legal support for betting operators, online casino operators, and other companies providing services to the online gaming industry, with a particular focus on preventing criminal law risks."
       }
     ]
   },
@@ -267,18 +267,20 @@
   },
   "PracticeAreas": {
     "criminal-defense": {
-      "title": "Criminal Defense",
+      "title": "Criminal Defense and Representation",
       "rows": [
-        "Comprehensive legal representation in criminal matters at both the pre-trial and trial stages. We protect the rights and interests of suspects, accused persons, defendants, witnesses, and victims throughout criminal proceedings.",
-        "Our practice includes strategic defense in complex criminal investigations, representation before investigative authorities, prosecutors, and courts, as well as the development of effective legal strategies aimed at safeguarding our clients’ rights and interests.",
-        "We also represent victims of criminal offenses, including corporate clients, business owners, and organizations that have suffered financial, economic, or reputational harm as a result of criminal conduct. Our team conducts legal assessments, assists in evidence gathering, pursues compensation claims, and ensures effective protection of victims’ rights throughout all stages of the criminal process."
+        "The Firm provides comprehensive legal representation in criminal matters at all stages of criminal proceedings, including the pre-trial investigation and trial. We protect the rights and legitimate interests of accused persons, witnesses, victims, as well as legal entities involved in criminal proceedings.",
+        "Our services include the development of defense strategies in complex criminal cases, representation before investigative authorities, prosecutors, and courts of all instances, as well as the design and implementation of effective legal strategies aimed at safeguarding our clients’ rights, freedoms, and legitimate interests.",
+        "We also represent victims of criminal offenses, including companies, business owners, and organizations that have suffered harm as a result of unlawful actions or omissions by criminal justice authorities during criminal proceedings."
       ]
     },
     "extradition-international-criminal-law": {
-      "title": "Extradition and International Criminal Law",
+      "title": "Extradition representation and Human rights protection",
       "rows": [
-        "Advising and representing individuals facing extradition requests, challenging extradition decisions, and protecting clients against unlawful transfer to foreign jurisdictions.",
-        "Our work includes conducting independent factual investigations, gathering and preserving evidence, interviewing witnesses, analyzing state actions and judicial proceedings, and building comprehensive legal and evidentiary records to substantiate human rights violations. We represent clients in cases involving unlawful detention, politically motivated prosecution, extradition and deportation risks, violations of fair trial guarantees, privacy rights, freedom of expression, property rights, and other fundamental protections under international human rights instruments."
+        "We advise and represent individuals who are the subject of extradition requests, challenge extradition decisions, and protect clients against unlawful surrender to foreign jurisdictions.",
+        "Protecting the rights of individuals facing extradition often requires comprehensive legal representation extending beyond criminal and international law to include strategic use of migration and asylum law mechanisms.",
+        "Our work includes conducting independent factual investigations, identifying, collecting, preserving, and securing evidence, interviewing witnesses, analyzing the actions of state authorities and judicial proceedings, and developing comprehensive legal and evidentiary records demonstrating violations of fundamental human rights.",
+        "A properly prepared evidentiary record establishing procedural and other fundamental human rights violations in the requesting state is often the decisive factor in securing the refusal of an extradition request. In such cases, the outcome of extradition proceedings frequently depends on the quality of the evidence gathered and the strength of the legal strategy developed in support of the client’s case."
       ]
     },
     "interpol-matters": {
@@ -293,13 +295,18 @@
     "international-human-rights": {
       "title": "International Human Rights Protection",
       "rows": [
-        "Representation before national and international bodies in matters involving fundamental rights, non-refoulement, asylum, and protection from politically motivated prosecution."
+        "We represent individuals whose fundamental rights have been violated by state authorities, providing legal representation before national courts, international human rights bodies, and regional mechanisms, including the United Nations treaty bodies and the European Court of Human Rights.",
+        "Our practice covers a broad range of matters, including arbitrary and unlawful detention, torture and ill-treatment, violations of fair trial guarantees, freedom of expression and privacy rights, asylum and refugee status applications, and the application of the non-refoulement principle to prevent the return of individuals to states where they face persecution or serious harm.",
+        "We advise and represent clients facing politically motivated prosecution, providing strategic guidance on protective measures, including urgent applications for interim measures before international bodies to prevent deportation, extradition, or other irreversible harm while a case is pending.",
+        "Our work includes preparing individual complaints and communications to international human rights mechanisms, gathering and presenting evidence of rights violations, and pursuing remedies aimed at securing recognition of violations, protective measures, and just compensation for our clients."
       ]
     },
     "betting-gaming-law": {
       "title": "Betting and Gaming Law",
       "rows": [
-        "Legal support for betting, gaming, and gambling operators with a particular focus on criminal law risk prevention and regulatory compliance. Advising businesses on the lawful structuring of operations, identifying and mitigating criminal liability risks, developing compliance strategies, and protecting owners, executives, and key personnel from potential criminal prosecution. Providing ongoing legal risk management to ensure the secure and sustainable operation of gaming and betting businesses across multiple jurisdictions."
+        "Legal support for betting operators, online casino operators, and other companies providing services to the online gaming industry, with a particular focus on preventing criminal law risks.",
+        "We advise companies on the lawful structuring of their operations, the identification and mitigation of criminal liability risks, the development of compliance strategies, and the protection of owners, executives, and key personnel against potential criminal prosecution.",
+        "Our services include the ongoing management of legal risks to ensure the safe, lawful, and sustainable operation of betting, gaming, and other businesses associated with the gaming industry across multiple jurisdictions."
       ]
     }
   }
