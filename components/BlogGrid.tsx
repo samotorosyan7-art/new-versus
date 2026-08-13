@@ -35,9 +35,6 @@ export default async function BlogGrid({ locale }: BlogGridProps) {
         <div className="blog-cards-grid">
           {posts.map((post: InsightMeta) => (
             <Link key={post.slug} href={`/cases/${post.slug}`} className="blog-card">
-              <div className="blog-card-tag">
-                <span className="tag-pill">{post.tag}</span>
-              </div>
               <h3 className="blog-card-title">{post.title}</h3>
               {post.excerpt && (
                 <p className="blog-card-excerpt">{post.excerpt}</p>

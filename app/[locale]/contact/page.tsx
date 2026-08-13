@@ -23,21 +23,21 @@ export default function ContactPage() {
             >
               <div className="contact-stat">
                 <span className="contact-stat-icon">📍</span>
-                <span className="contact-stat-label">Location</span>
+                <span className="contact-stat-label">{t('locationLabel')}</span>
                 <span className="contact-stat-value">{t('address')}</span>
               </div>
             </a>
             <a href={`mailto:${t('email')}`} className="contact-stat-link">
               <div className="contact-stat">
                 <span className="contact-stat-icon">✉️</span>
-                <span className="contact-stat-label">Email</span>
+                <span className="contact-stat-label">{t('emailLabel')}</span>
                 <span className="contact-stat-value">{t('email')}</span>
               </div>
             </a>
             <a href={`tel:${t('phone').replace(/\s+/g, '')}`} className="contact-stat-link">
               <div className="contact-stat">
                 <span className="contact-stat-icon">📞</span>
-                <span className="contact-stat-label">Phone</span>
+                <span className="contact-stat-label">{t('phoneLabel')}</span>
                 <span className="contact-stat-value">{t('phone')}</span>
               </div>
             </a>

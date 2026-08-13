@@ -61,12 +61,10 @@ export default async function InsightPostPage({ params }: Props) {
       <div style={{ paddingTop: '60px' }}>
         <article className="case-detail">
           <header className="case-detail-header">
-            <Link href="/cases" className="blog-reading-back">
-              ← {t('backToInsights')}
-            </Link>
-
             <div className="blog-reading-eyebrow">
-              <span className="tag-pill">{post.tag}</span>
+              <Link href="/cases" className="blog-reading-back">
+                ← {t('backToCases')}
+              </Link>
               <span className="blog-reading-date">{formattedDate}</span>
             </div>
 

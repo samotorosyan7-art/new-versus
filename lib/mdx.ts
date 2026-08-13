@@ -54,12 +54,12 @@ export function getAllInsights(locale: string): InsightMeta[] {
     });
   }
 
-  // Sort: by manual order first (lower = earlier; items without an order go last),
+  // Sort: by manual order first (higher = earlier; items without an order go last),
   // then featured, then by date descending.
   return posts.sort((a, b) => {
-    const ao = a.order ?? Number.POSITIVE_INFINITY;
-    const bo = b.order ?? Number.POSITIVE_INFINITY;
-    if (ao !== bo) return ao - bo;
+    const ao = a.order ?? Number.NEGATIVE_INFINITY;
+    const bo = b.order ?? Number.NEGATIVE_INFINITY;
+    if (ao !== bo) return bo - ao;
     if (a.isFeatured && !b.isFeatured) return -1;
     if (!a.isFeatured && b.isFeatured) return 1;
     return new Date(b.date).getTime() - new Date(a.date).getTime();

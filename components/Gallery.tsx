@@ -3,7 +3,9 @@ import { useState, useCallback, useEffect, useRef } from 'react';
 import Image from 'next/image';
 
 export interface GallerySlide {
-  src: string;
+  type?: 'image' | 'video';
+  src?: string;
+  videoId?: string;
   caption?: string;
 }
 
@@ -55,18 +57,31 @@ export default function Gallery({ slides }: GalleryProps) {
           className="gallery-track"
           style={{ transform: `translateX(-${index * 100}%)` }}
         >
-          {slides.map((slide, i) => (
-            <div className="gallery-slide" key={i}>
-              <Image
-                src={slide.src}
-                alt={slide.caption || `Gallery image ${i + 1}`}
-                fill
-                sizes="(max-width: 1320px) 100vw, 1200px"
-                className="gallery-img"
-                priority={i === 0}
-              />
-            </div>
-          ))}
+          {slides.map((slide, i) =>
+            slide.type === 'video' ? (
+              <div className="gallery-slide" key={i}>
+                <iframe
+                  className="gallery-video"
+                  src={`https://www.youtube.com/embed/${slide.videoId}`}
+                  title={slide.caption || `Gallery video ${i + 1}`}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  loading="lazy"
+                />
+              </div>
+            ) : (
+              <div className="gallery-slide" key={i}>
+                <Image
+                  src={slide.src!}
+                  alt={slide.caption || `Gallery image ${i + 1}`}
+                  fill
+                  sizes="(max-width: 1320px) 100vw, 1200px"
+                  className="gallery-img"
+                  priority={i === 0}
+                />
+              </div>
+            )
+          )}
         </div>
 
         {total > 1 && (

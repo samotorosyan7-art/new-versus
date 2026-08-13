@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Playfair_Display, Cormorant_Garamond, DM_Sans } from 'next/font/google';
+import localFont from 'next/font/local';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations } from 'next-intl/server';
 import ClientLayout from '@/components/ClientLayout';
@@ -24,6 +25,15 @@ const dmSans = DM_Sans({
   subsets: ['latin'],
   weight: ['200', '300', '400', '500'],
   variable: '--font-dm-sans',
+  display: 'swap',
+});
+
+const gheaGrapalat = localFont({
+  src: [
+    { path: '../fonts/GHEAGrapalat-Regular.otf', weight: '400', style: 'normal' },
+    { path: '../fonts/GHEAGrapalat-Bold.otf', weight: '700', style: 'normal' },
+  ],
+  variable: '--font-ghea-grapalat',
   display: 'swap',
 });
 
@@ -54,7 +64,7 @@ export async function generateMetadata({
     icons: {
       icon: '/favicon.ico',
       shortcut: '/favicon.ico',
-      apple: '/logo.png',
+      apple: '/apple-touch-icon.png',
     },
     robots: {
       index: true,
@@ -126,7 +136,7 @@ export default async function RootLayout({
   };
 
   return (
-    <html lang={locale} className={`${playfair.variable} ${cormorant.variable} ${dmSans.variable}`} suppressHydrationWarning>
+    <html lang={locale} className={`${playfair.variable} ${cormorant.variable} ${dmSans.variable} ${gheaGrapalat.variable}`} suppressHydrationWarning>
       <body suppressHydrationWarning>
         <script
           type="application/ld+json"

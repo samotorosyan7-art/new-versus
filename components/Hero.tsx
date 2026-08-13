@@ -12,7 +12,7 @@ export default function Hero() {
     <section id="hero" className="hero-reversed">
       <div className="hero-text-col">
         <p className="hero-overline">{t('overline')}</p>
-        <h1 className="hero-name">Vache Simonyan</h1>
+        <h1 className="hero-name">{t('displayName')}</h1>
         <div className="hero-tagline-group">
           {tagline.map((para, i) => (
             <p className="hero-tagline" key={i}>

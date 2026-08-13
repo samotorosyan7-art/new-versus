@@ -16,7 +16,6 @@ export default async function CasesGrid({ locale }: CasesGridProps) {
         <div>
           <p className="section-label">{t('label')}</p>
           <h2 className="section-title">{t('title')}</h2>
-          <p className="cases-intro">{t('intro')}</p>
         </div>
       </div>
 
@@ -30,7 +29,6 @@ export default async function CasesGrid({ locale }: CasesGridProps) {
                 {(i + 1).toString().padStart(2, '0')}
               </span>
               <div className="case-main">
-                <span className="case-tag">{c.tag}</span>
                 <h3 className="case-title">{c.title}</h3>
                 {c.excerpt && <p className="case-excerpt">{c.excerpt}</p>}
               </div>

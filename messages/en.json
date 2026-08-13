@@ -36,46 +36,33 @@
       "description": "Our proprietary method for high-stakes legal conflict — diagnosis, strategy construction, and relentless execution. The outcome is decided before the first move."
     }
   },
+  "NotFound": {
+    "title": "Page Not Found",
+    "description": "The page you're looking for doesn't exist or has been moved.",
+    "cta": "Return to homepage"
+  },
   "About": {
-    "label": "About the firm",
-    "title": "Vache Simonyan",
-    "role": "Founder & Attorney at Law",
-    "intro": "A legal strategist based in Yerevan, dedicated to representing founders, executives, and enterprises in their most consequential disputes. Where others see complexity, I find leverage.",
     "bioTitle": "Biography",
     "bio": [
       "Vache Simonyan received his legal education at the Russian-Armenian University, where he completed both his Bachelor's and Master's degrees in Law.",
       "In 2017, he began his professional career within the Prosecutor's Office of the Republic of Armenia, where, for eight years, he focused on criminal law, criminal procedure, pre-trial investigations, and criminal litigation.",
       "Following his service in the Prosecutor's Office, Vache Simonyan continued his professional career as an attorney. He is currently the Founder and Managing Partner of Versus Law Firm, specializing in criminal defense, extradition proceedings, and the protection of the rights of individuals subject to international wanted notices."
     ],
-    "educationTitle": "Education",
-    "education": [
-      { "degree": "LL.M., International Law", "school": "Yerevan State University", "year": "2014" },
-      { "degree": "LL.B., Law", "school": "Yerevan State University", "year": "2012" },
-      { "degree": "Advanced Program in International Arbitration", "school": "Continuing Legal Education", "year": "2016" }
-    ],
-    "credentialsTitle": "Credentials & Memberships",
-    "credentials": [
-      "Member, Chamber of Advocates of the Republic of Armenia",
-      "Licensed Attorney — Criminal & Civil Litigation",
-      "Registered Representative, International Arbitration"
-    ],
-    "languagesTitle": "Languages",
-    "languages": [
-      "Armenian — Native",
-      "Russian — Fluent",
-      "English — Professional"
-    ],
-    "galleryLabel": "Inside the practice",
     "galleryTitle": "Gallery",
     "galleryCaptions": [
       "At the Versus Law Firm offices, Yerevan",
       "Founder Vache Simonyan",
       "Strategy and preparation",
       "Representation at every tier of the judiciary"
+    ],
+    "videoCaptions": [
+      "Featured on Azatutyun",
+      "Featured on Azatutyun"
     ]
   },
   "Hero": {
     "overline": "Attorney · Yerevan, Armenia",
+    "displayName": "Vache Simonyan",
     "name": "Vache Simonyan — Attorney at Law",
     "tagline": [
       "Vache Simonyan is an attorney, the Founder and Managing Partner of «Versus» Law Firm.",
@@ -131,12 +118,6 @@
       },
       {
         "num": "04",
-        "slug": "international-human-rights",
-        "title": "International Human Rights Protection",
-        "desc": "We represent individuals whose fundamental rights have been violated by state authorities, providing legal representation before national courts, international human rights bodies, and regional mechanisms."
-      },
-      {
-        "num": "05",
         "slug": "betting-gaming-law",
         "title": "Betting and Gaming Law",
         "desc": "Legal support for betting operators, online casino operators, and other companies providing services to the online gaming industry, with a particular focus on preventing criminal law risks."
@@ -245,13 +226,12 @@
     "sectionTitle": "Before the First Move Is Made",
     "readMore": "Read",
     "featured": "Featured",
-    "backToInsights": "Back to Insights",
+    "backToCases": "Back to Cases",
     "noPostsFound": "No posts found."
   },
   "Cases": {
     "label": "Case record",
     "title": "Selected Cases",
-    "intro": "A record of representative matters — each resolved through preparation, precision, and relentless execution.",
     "readMore": "View case",
     "featured": "Featured case",
     "viewAll": "All cases",
@@ -270,7 +250,8 @@
     "copyright": "© {year} Vache Simonyan. All rights reserved.",
     "address": "Yerevan, Marshal Baghramyan 41, apt. 9",
     "phone": "+374 94 363 484",
-    "email": "versus.proc@gmail.com"
+    "email": "versus.proc@gmail.com",
+    "privacy": "Privacy"
   },
   "PracticeAreas": {
     "criminal-defense": {
@@ -297,15 +278,6 @@
         "Our services include legal assessment of INTERPOL-related risks, analysis of criminal proceedings underlying INTERPOL requests, collection and preservation of evidence, preparation of factual and legal submissions, and the development of comprehensive strategies aimed at preventing, challenging, correcting, or deleting INTERPOL data.",
         "A critical part of our INTERPOL practice is the preparatory work conducted before any application is submitted to the Commission for the Control of INTERPOL’s Files (CCF). Prior to filing, we carry out a comprehensive legal and factual assessment of the case, identify potential weaknesses, collect and verify supporting evidence, obtain relevant court and administrative documents, and develop a tailored legal strategy designed to maximize the prospects of success.",
         "Our objective is to ensure that every application is supported by a complete and well-documented evidentiary record, thereby significantly reducing the risk of rejection and increasing the likelihood of obtaining access, correction, or deletion of INTERPOL data."
-      ]
-    },
-    "international-human-rights": {
-      "title": "International Human Rights Protection",
-      "rows": [
-        "We represent individuals whose fundamental rights have been violated by state authorities, providing legal representation before national courts, international human rights bodies, and regional mechanisms, including the United Nations treaty bodies and the European Court of Human Rights.",
-        "Our practice covers a broad range of matters, including arbitrary and unlawful detention, torture and ill-treatment, violations of fair trial guarantees, freedom of expression and privacy rights, asylum and refugee status applications, and the application of the non-refoulement principle to prevent the return of individuals to states where they face persecution or serious harm.",
-        "We advise and represent clients facing politically motivated prosecution, providing strategic guidance on protective measures, including urgent applications for interim measures before international bodies to prevent deportation, extradition, or other irreversible harm while a case is pending.",
-        "Our work includes preparing individual complaints and communications to international human rights mechanisms, gathering and presenting evidence of rights violations, and pursuing remedies aimed at securing recognition of violations, protective measures, and just compensation for our clients."
       ]
     },
     "betting-gaming-law": {
