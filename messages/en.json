@@ -43,9 +43,9 @@
     "intro": "A legal strategist based in Yerevan, dedicated to representing founders, executives, and enterprises in their most consequential disputes. Where others see complexity, I find leverage.",
     "bioTitle": "Biography",
     "bio": [
-      "Vache Simonyan is the founder of Versus Law Firm, a boutique practice built on a single conviction: in high-stakes legal conflict, the outcome is decided before the first move is made. Over more than a decade of practice, he has represented clients across criminal defense, commercial litigation, and cross-border arbitration.",
-      "His approach blends rigorous preparation with relentless execution. He has intervened at the earliest stages of investigations to protect clients' rights, dismantled prosecutorial arguments to secure release, and led arbitration defenses against international claimants — consistently turning pressure into advantage.",
-      "Beyond the courtroom, Vache advises businesses navigating Armenia's evolving regulatory landscape, from fintech licensing to corporate restructuring. He is known for his directness, his command of detail, and his refusal to accept uncertainty as an outcome."
+      "Vache Simonyan received his legal education at the Russian-Armenian University, where he completed both his Bachelor's and Master's degrees in Law.",
+      "In 2017, he began his professional career within the Prosecutor's Office of the Republic of Armenia, where, for eight years, he focused on criminal law, criminal procedure, pre-trial investigations, and criminal litigation.",
+      "Following his service in the Prosecutor's Office, Vache Simonyan continued his professional career as an attorney. He is currently the Founder and Managing Partner of Versus Law Firm, specializing in criminal defense, extradition proceedings, and the protection of the rights of individuals subject to international wanted notices."
     ],
     "educationTitle": "Education",
     "education": [
@@ -77,7 +77,14 @@
   "Hero": {
     "overline": "Attorney · Yerevan, Armenia",
     "name": "Vache Simonyan — Attorney at Law",
-    "tagline": "I am Vache Simonyan, a legal strategist based in Yerevan. I believe that in business, as in litigation, clarity is power. I partner with founders and enterprises to navigate complex regulatory landscapes, protect assets, and dismantle uncertainty with absolute precision.",
+    "tagline": [
+      "Vache Simonyan is an attorney, the Founder and Managing Partner of «Versus» Law Firm.",
+      "His professional practice is focused on criminal law and the defense of clients in criminal proceedings in the Republic of Armenia. He represents clients at every stage of the criminal process, from the pre-trial investigation through to proceedings before courts of all instances.",
+      "One of the key areas of his practice is extradition defense and matters involving international wanted persons. Vache Simonyan represents individuals who are subject to extradition requests, as well as persons sought internationally, safeguarding their rights and legitimate interests before the courts of the Republic of Armenia.",
+      "Before entering private legal practice, Vache Simonyan served for eight years in the Prosecutor's Office of the Republic of Armenia. During this period, he gained deep knowledge of criminal law and criminal procedure, as well as practical experience in the organization of pre-trial investigations, the prosecution of criminal cases, and the handling of criminal proceedings before the courts.",
+      "His extensive and successful experience in these areas enables him to provide effective and confident protection of his clients' rights and legitimate interests.",
+      "His work in the Prosecutor's Office allowed him to develop a comprehensive understanding of the mechanisms of criminal prosecution, the principles behind the formation of the prosecution's position, and the functioning of the law enforcement system. Today, this experience serves as a strong foundation for his defense practice, enabling him to build effective defense strategies, identify procedural risks in a timely manner, and provide qualified legal assistance to clients at every stage of criminal proceedings."
+    ],
     "cta": "Begin consultation",
     "scroll": "Scroll",
     "insights": "Selected Cases"

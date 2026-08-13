@@ -3,7 +3,9 @@ import { useTranslations, useMessages } from 'next-intl';
 import { useParams, notFound } from 'next/navigation';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
+import ImagePlaceholder from '@/components/ImagePlaceholder';
 import { Link } from '@/navigation';
+import { practiceAreaImages } from '@/lib/practiceAreaImages';
 
 export default function PracticeAreaDetail() {
   const params = useParams();
@@ -26,15 +28,20 @@ export default function PracticeAreaDetail() {
           <h1 className="practice-title">{t('title')}</h1>
         </header>
 
-        <section className="practice-rows">
-          {(t.raw('rows') as string[]).map((row, i) => (
-            <p
-              key={i}
-              className={`practice-row reveal${i > 0 ? ` reveal-delay-${Math.min(i, 3)}` : ''}`}
-            >
-              {row}
-            </p>
-          ))}
+        <section className="practice-hero reveal">
+          <div className="practice-hero-media">
+            <ImagePlaceholder src={practiceAreaImages[slug]} alt={t('title')} priority />
+          </div>
+          <div className="practice-hero-text">
+            {(t.raw('rows') as string[]).map((row, i) => (
+              <p
+                key={i}
+                className={`practice-row${i > 0 ? ` reveal-delay-${Math.min(i, 3)}` : ''}`}
+              >
+                {row}
+              </p>
+            ))}
+          </div>
         </section>
       </div>
       <Footer />
@@ -62,17 +69,28 @@ export default function PracticeAreaDetail() {
           margin-bottom: 60px;
           color: var(--text);
         }
-        .practice-rows {
-          max-width: 820px;
+        .practice-hero {
+          display: grid;
+          grid-template-columns: minmax(0, 420px) 1fr;
+          gap: 56px;
+          align-items: start;
+        }
+        .practice-hero-media {
+          position: sticky;
+          top: 100px;
+        }
+        .practice-hero-text {
+          min-width: 0;
         }
         .practice-row {
-          font-size: 1.35rem;
+          font-size: 1.25rem;
           line-height: 1.7;
           color: var(--text-muted);
-          padding: 32px 0;
+          padding: 28px 0;
           border-bottom: 1px solid var(--border);
         }
         .practice-row:first-child { padding-top: 0; }
+        .practice-row:last-child { border-bottom: none; }
         .practice-cta {
           display: inline-block;
           margin-top: 56px;
@@ -90,6 +108,14 @@ export default function PracticeAreaDetail() {
         @media (max-width: 1024px) {
           .practice-detail-container { padding: 48px 40px 60px; }
           .practice-title { font-size: 2.8rem; }
+          .practice-hero {
+            grid-template-columns: 1fr;
+            gap: 32px;
+          }
+          .practice-hero-media {
+            position: static;
+            max-width: 420px;
+          }
         }
         @media (max-width: 640px) {
           .practice-detail-container { padding: 40px 20px 48px; }

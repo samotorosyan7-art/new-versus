@@ -3,14 +3,18 @@ import { notFound } from 'next/navigation';
 import { getInsightBySlug, getAllInsightSlugs } from '@/lib/mdx';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
-import { getTranslations } from 'next-intl/server';
+import ImagePlaceholder from '@/components/ImagePlaceholder';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Link } from '@/navigation';
 import ReactMarkdown from 'react-markdown';
 import { pageMetadata, SITE_NAME } from '@/lib/seo';
+import { routing } from '@/navigation';
 
 export async function generateStaticParams() {
   const slugs = getAllInsightSlugs();
-  return slugs;
+  return routing.locales.flatMap((locale) =>
+    slugs.map(({ slug }) => ({ locale, slug }))
+  );
 }
 
 interface Props {
@@ -36,10 +40,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function InsightPostPage({ params }: Props) {
   const { locale, slug } = await params;
+  setRequestLocale(locale);
   const post = getInsightBySlug(slug, locale);
   const t = await getTranslations('Blog');
   const th = await getTranslations('Hero');
-  const tc = await getTranslations('Cases');
 
   if (!post) {
     notFound();
@@ -68,33 +72,29 @@ export default async function InsightPostPage({ params }: Props) {
 
             <h1 className="blog-reading-title">{post.title}</h1>
 
-            {post.excerpt && (
-              <p className="blog-reading-excerpt">{post.excerpt}</p>
-            )}
-
             <span className="blog-reading-rule" aria-hidden="true" />
           </header>
 
-          <div className="case-detail-grid">
-            <div className="prose case-detail-body">
-              <ReactMarkdown>{post.content}</ReactMarkdown>
+          <div className="case-hero">
+            <div className="case-hero-media">
+              <ImagePlaceholder src={post.image} alt={post.title} priority />
             </div>
 
-            <aside className="case-file">
-              <div className="case-file-card">
-                <p className="case-file-label">{tc('label')}</p>
-                <div className="case-file-meta">
-                  <span className="tag-pill">{post.tag}</span>
-                  <span className="case-file-date">{formattedDate}</span>
-                </div>
-                <Link href="/contact" className="primary-btn case-file-cta">
-                  {th('cta')}
-                </Link>
-                <Link href="/cases" className="case-file-back">
-                  ← {t('backToInsights')}
-                </Link>
+            <div className="case-hero-text">
+              {post.excerpt && (
+                <p className="blog-reading-excerpt">{post.excerpt}</p>
+              )}
+
+              <div className="prose case-detail-body">
+                <ReactMarkdown>{post.content}</ReactMarkdown>
               </div>
-            </aside>
+            </div>
+          </div>
+
+          <div className="case-detail-cta">
+            <Link href="/contact" className="primary-btn">
+              {th('cta')}
+            </Link>
           </div>
         </article>
       </div>

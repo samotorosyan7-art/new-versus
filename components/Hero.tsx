@@ -6,13 +6,20 @@ import { motion } from 'framer-motion';
 
 export default function Hero() {
   const t = useTranslations('Hero');
+  const tagline = t.raw('tagline') as string[];
 
   return (
     <section id="hero" className="hero-reversed">
       <div className="hero-text-col">
         <p className="hero-overline">{t('overline')}</p>
         <h1 className="hero-name">Vache Simonyan</h1>
-        <p className="hero-tagline">{t('tagline')}</p>
+        <div className="hero-tagline-group">
+          {tagline.map((para, i) => (
+            <p className="hero-tagline" key={i}>
+              {para}
+            </p>
+          ))}
+        </div>
         <div className="hero-cta-wrap">
           <Link href="/contact" className="primary-btn">
             {t('cta')}

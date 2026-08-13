@@ -14,6 +14,8 @@ export interface InsightMeta {
   isFeatured?: boolean;
   /** Manual sort order (lower = first). Configurable from the admin panel. */
   order?: number;
+  /** Optional cover image path. Falls back to a placeholder when unset. */
+  image?: string;
 }
 
 export interface Insight extends InsightMeta {
@@ -48,6 +50,7 @@ export function getAllInsights(locale: string): InsightMeta[] {
       excerpt: data.excerpt ?? '',
       isFeatured: data.isFeatured ?? false,
       order: typeof data.order === 'number' ? data.order : undefined,
+      image: data.image ?? undefined,
     });
   }
 
@@ -84,6 +87,7 @@ export function getInsightBySlug(slug: string, locale: string): Insight | null {
       excerpt: data.excerpt ?? '',
       isFeatured: data.isFeatured ?? false,
       order: typeof data.order === 'number' ? data.order : undefined,
+      image: data.image ?? undefined,
       content,
     };
   }
@@ -100,6 +104,7 @@ export function getInsightBySlug(slug: string, locale: string): Insight | null {
     excerpt: data.excerpt ?? '',
     isFeatured: data.isFeatured ?? false,
     order: typeof data.order === 'number' ? data.order : undefined,
+    image: data.image ?? undefined,
     content,
   };
 }
