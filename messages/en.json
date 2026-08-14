@@ -34,6 +34,10 @@
     "protocol": {
       "title": "The Protocol",
       "description": "Our proprietary method for high-stakes legal conflict — diagnosis, strategy construction, and relentless execution. The outcome is decided before the first move."
+    },
+    "privacyPolicy": {
+      "title": "Privacy Policy",
+      "description": "How Versus Law Firm collects, uses, and protects the personal data of clients and website visitors."
     }
   },
   "NotFound": {
@@ -154,7 +158,6 @@
   },
   "IntakeForm": {
     "label": "Start here",
-    "question": "What are we fighting today?",
     "sub": "No forms. No friction. A brief conversation to understand your situation — so when we speak, we're already aligned.",
     "selectMatter": "Select your matter",
     "continue": "Continue",
@@ -162,6 +165,7 @@
     "startOver": "Start over",
     "received": "Received.",
     "confirmation": "Vache will review your matter personally and reach out within 24 hours. Expect directness, not boilerplate.",
+    "error": "Something went wrong. Please try again or reach us on WhatsApp.",
     "placeholderDesc": "Describe your situation briefly",
     "placeholderName": "Your name",
     "placeholderEmail": "Email address",
@@ -248,7 +252,7 @@
     "newsletterSub": "Receive high-level insights on the Armenian legal landscape.",
     "newsletterPlaceholder": "Email address",
     "copyright": "© {year} Vache Simonyan. All rights reserved.",
-    "address": "Yerevan, Marshal Baghramyan 41, apt. 9",
+    "address": "Yerevan, Marshal Baghramyan 41, 9",
     "phone": "+374 94 363 484",
     "email": "versus.proc@gmail.com",
     "privacy": "Privacy"
@@ -288,5 +292,22 @@
         "Our services include the ongoing management of legal risks to ensure the safe, lawful, and sustainable operation of betting, gaming, and other businesses associated with the gaming industry across multiple jurisdictions."
       ]
     }
+  },
+  "PrivacyPolicy": {
+    "effective": "Effective {date}"
+  },
+  "ConsultationModal": {
+    "title": "Begin Your Consultation",
+    "subtitle": "Share a few details and Vache will review your matter personally.",
+    "placeholderName": "Your name",
+    "placeholderEmail": "Email address",
+    "placeholderPhone": "Phone number",
+    "placeholderMessage": "Briefly describe your situation",
+    "submit": "Send",
+    "sending": "Sending…",
+    "received": "Received.",
+    "confirmation": "Vache will review your matter personally and reach out within 24 hours. Expect directness, not boilerplate.",
+    "error": "Something went wrong. Please try again or reach us on WhatsApp.",
+    "close": "Close"
   }
 }

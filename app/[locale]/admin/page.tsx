@@ -159,7 +159,7 @@ export default function AdminPage() {
   if (!isLoggedIn) {
     return (
       <div style={{ maxWidth: '400px', margin: '100px auto', padding: '40px', background: 'var(--surface)', borderRadius: 'var(--radius-lg)' }}>
-        <h1 style={{ marginBottom: '24px', fontFamily: 'var(--font-playfair)' }}>Admin Access</h1>
+        <h1 style={{ marginBottom: '24px', fontFamily: 'var(--font-serif)' }}>Admin Access</h1>
         <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <input 
             type="password" 
@@ -179,7 +179,7 @@ export default function AdminPage() {
       <div style={{ width: '320px', borderRight: '1px solid var(--border)', background: 'var(--surface)', display: 'flex', flexDirection: 'column' }}>
         <div style={{ padding: '24px', borderBottom: '1px solid var(--border)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-            <h2 style={{ fontFamily: 'var(--font-playfair)', margin: 0 }}>Articles</h2>
+            <h2 style={{ fontFamily: 'var(--font-serif)', margin: 0 }}>Articles</h2>
             <button onClick={handleLogout} style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', fontSize: '12px' }}>Logout</button>
           </div>
           <button onClick={handleNew} className="primary-btn" style={{ width: '100%', padding: '12px', fontSize: '11px' }}>+ Compose New</button>
@@ -210,7 +210,7 @@ export default function AdminPage() {
       {/* EDITOR */}
       <div style={{ flex: 1, padding: '48px', overflowY: 'auto' }}>
         <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-          <h1 style={{ marginBottom: '8px', fontFamily: 'var(--font-playfair)' }}>
+          <h1 style={{ marginBottom: '8px', fontFamily: 'var(--font-serif)' }}>
             {editingFileName ? 'Edit Article' : 'Draft New Article'}
           </h1>
           <p style={{ color: 'var(--text-muted)', marginBottom: '32px', fontSize: '14px' }}>

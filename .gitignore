@@ -9,3 +9,6 @@ node_modules
 # Local push helper & secrets — never commit
 push.sh
 .push.env
+
+# Claude Code agent worktrees — local scaffolding, never commit
+.claude/worktrees/

@@ -1,8 +1,8 @@
 'use client';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import { Link } from '@/navigation';
 import { motion } from 'framer-motion';
+import ConsultationButton from './ConsultationButton';
 
 export default function Hero() {
   const t = useTranslations('Hero');
@@ -21,9 +21,7 @@ export default function Hero() {
           ))}
         </div>
         <div className="hero-cta-wrap">
-          <Link href="/contact" className="primary-btn">
-            {t('cta')}
-          </Link>
+          <ConsultationButton label={t('cta')} />
         </div>
       </div>
       <div className="hero-img-col">

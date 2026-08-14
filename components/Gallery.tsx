@@ -62,11 +62,10 @@ export default function Gallery({ slides }: GalleryProps) {
               <div className="gallery-slide" key={i}>
                 <iframe
                   className="gallery-video"
-                  src={`https://www.youtube.com/embed/${slide.videoId}`}
+                  src={`https://www.youtube-nocookie.com/embed/${slide.videoId}?playsinline=1&rel=0`}
                   title={slide.caption || `Gallery video ${i + 1}`}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
-                  loading="lazy"
                 />
               </div>
             ) : (

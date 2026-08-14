@@ -82,6 +82,7 @@ export default function IntakeForm() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
   const phoneRef = useRef<HTMLInputElement>(null);
@@ -117,6 +118,7 @@ export default function IntakeForm() {
 
   const submitForm = async () => {
     setIsLoading(true);
+    setError(false);
     const fullPhone = `${selectedCountry.dial} ${phoneRef.current?.value || ''}`.trim();
 
     try {
@@ -128,10 +130,10 @@ export default function IntakeForm() {
       if (res.ok) {
         goToStep(2);
       } else {
-        // Failed to submit:
+        setError(true);
       }
     } catch (e) {
-      // Error in submission
+      setError(true);
     } finally {
       setIsLoading(false);
     }
@@ -151,11 +153,6 @@ export default function IntakeForm() {
     <section id="intake">
       <div className="intake-copy reveal">
         <p className="section-label">{t('label')}</p>
-        <h2 className="intake-question">
-          {t.rich('question', {
-            br: () => <br />
-          })}
-        </h2>
         <p className="intake-sub">{t('sub')}</p>
       </div>
 
@@ -221,6 +218,9 @@ export default function IntakeForm() {
             <input ref={phoneRef} type="tel" className="phone-number-input" placeholder={t('placeholderPhone')} />
           </div>
 
+          {error && (
+            <p style={{ color: '#c0392b', fontSize: '13px', marginBottom: '12px' }}>{t('error')}</p>
+          )}
           <button className="intake-submit" onClick={submitForm} disabled={isLoading}>
             {isLoading ? '...' : t('continue')}
           </button>
@@ -234,7 +234,7 @@ export default function IntakeForm() {
             <div style={{ width: '48px', height: '48px', border: '1px solid var(--accent)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '24px' }}>
               <span style={{ color: 'var(--accent)', fontSize: '20px' }}>✓</span>
             </div>
-            <p style={{ fontFamily: "var(--font-playfair), serif", fontSize: '1.4rem', fontWeight: 700, marginBottom: '12px' }}>
+            <p style={{ fontFamily: "var(--font-serif), serif", fontSize: '1.4rem', fontWeight: 700, marginBottom: '12px' }}>
               {t('received')}
             </p>
             <p style={{ fontSize: '14px', lineHeight: 1.8, color: 'var(--text-muted)' }}>

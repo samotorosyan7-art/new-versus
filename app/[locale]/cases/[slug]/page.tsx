@@ -4,6 +4,7 @@ import { getInsightBySlug, getAllInsightSlugs } from '@/lib/mdx';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import ImagePlaceholder from '@/components/ImagePlaceholder';
+import ConsultationButton from '@/components/ConsultationButton';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Link } from '@/navigation';
 import ReactMarkdown from 'react-markdown';
@@ -90,9 +91,7 @@ export default async function InsightPostPage({ params }: Props) {
           </div>
 
           <div className="case-detail-cta">
-            <Link href="/contact" className="primary-btn">
-              {th('cta')}
-            </Link>
+            <ConsultationButton label={th('cta')} />
           </div>
         </article>
       </div>

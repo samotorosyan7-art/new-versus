@@ -1,5 +1,6 @@
 'use client';
 import { useTranslations } from 'next-intl';
+import { Link } from '@/navigation';
 
 export default function Footer() {
   const t = useTranslations('Footer');
@@ -23,11 +24,17 @@ export default function Footer() {
             {t('address')}
           </a>
           <a href={`mailto:${t('email')}`}>{t('email')}</a>
-          <a href={`tel:${t('phone').replace(/\s+/g, '')}`}>{t('phone')}</a>
+          <a
+            href={`https://wa.me/${t('phone').replace(/[^\d]/g, '')}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {t('phone')}
+          </a>
         </div>
 
         <div className="footer-bottom-right">
-          <a href="#">{t('privacy')}</a>
+          <Link href="/privacy-policy">{t('privacy')}</Link>
           <button
             type="button"
             className="footer-to-top"

@@ -34,7 +34,12 @@ export default function ContactPage() {
                 <span className="contact-stat-value">{t('email')}</span>
               </div>
             </a>
-            <a href={`tel:${t('phone').replace(/\s+/g, '')}`} className="contact-stat-link">
+            <a
+              href={`https://wa.me/${t('phone').replace(/[^\d]/g, '')}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="contact-stat-link"
+            >
               <div className="contact-stat">
                 <span className="contact-stat-icon">📞</span>
                 <span className="contact-stat-label">{t('phoneLabel')}</span>
@@ -58,7 +63,7 @@ export default function ContactPage() {
           </div>
         </section>
 
-        {/* <IntakeForm /> */}
+        <IntakeForm />
       </div>
       <Footer />
 

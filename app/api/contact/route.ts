@@ -1,10 +1,15 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-// Using the explicit key provided by the user
-const resend = new Resend('re_Kk66jn2p_H4wSM43sqmKoLssFzynAsuRh');
+const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || 'Versus Law Firm <onboarding@resend.dev>';
+const TO_EMAIL = process.env.CONTACT_TO_EMAIL || 'versus.proc@gmail.com';
 
 export async function POST(request: Request) {
+  if (!process.env.RESEND_API_KEY) {
+    return NextResponse.json({ success: false, error: 'Email service is not configured' }, { status: 500 });
+  }
+  const resend = new Resend(process.env.RESEND_API_KEY);
+
   try {
     const data = await request.json();
     const { category, name, email, phone, description, type } = data;
@@ -33,9 +38,9 @@ export async function POST(request: Request) {
     }
 
     const resendData = await resend.emails.send({
-      from: 'Vache Simonyan <versus.proc@gmail.com>',
-      to: ['versus.proc@gmail.com'],
-      replyTo: email,
+      from: FROM_EMAIL,
+      to: [TO_EMAIL],
+      replyTo: email || undefined,
       subject,
       html: htmlContent,
     });

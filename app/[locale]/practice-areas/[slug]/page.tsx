@@ -65,7 +65,7 @@ export default function PracticeAreaDetail() {
           text-decoration: none;
         }
         .practice-title {
-          font-family: var(--font-playfair), serif;
+          font-family: var(--font-serif), serif;
           font-size: 1.5rem;
           font-weight: 700;
           line-height: 1.25;

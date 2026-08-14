@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Playfair_Display, Cormorant_Garamond, DM_Sans } from 'next/font/google';
+import { Source_Serif_4, Source_Sans_3 } from 'next/font/google';
 import localFont from 'next/font/local';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations } from 'next-intl/server';
@@ -7,24 +7,17 @@ import ClientLayout from '@/components/ClientLayout';
 import { SITE_URL, SITE_NAME, ogLocale, languageAlternates } from '@/lib/seo';
 import '../globals.css';
 
-const playfair = Playfair_Display({
-  subsets: ['latin'],
-  weight: ['400', '700', '900'],
-  variable: '--font-playfair',
+const sourceSerif = Source_Serif_4({
+  subsets: ['latin', 'latin-ext', 'cyrillic', 'cyrillic-ext'],
+  weight: 'variable',
+  variable: '--font-serif',
   display: 'swap',
 });
 
-const cormorant = Cormorant_Garamond({
-  subsets: ['latin'],
-  weight: ['300', '400', '600'],
-  variable: '--font-cormorant',
-  display: 'swap',
-});
-
-const dmSans = DM_Sans({
-  subsets: ['latin'],
-  weight: ['200', '300', '400', '500'],
-  variable: '--font-dm-sans',
+const sourceSans = Source_Sans_3({
+  subsets: ['latin', 'latin-ext', 'cyrillic', 'cyrillic-ext'],
+  weight: 'variable',
+  variable: '--font-sans',
   display: 'swap',
 });
 
@@ -121,7 +114,7 @@ export default async function RootLayout({
     priceRange: '$$$',
     address: {
       '@type': 'PostalAddress',
-      streetAddress: 'Marshal Baghramyan Ave 41, apt. 9',
+      streetAddress: 'Marshal Baghramyan Ave 41, 9',
       addressLocality: 'Yerevan',
       addressCountry: 'AM',
     },
@@ -136,7 +129,7 @@ export default async function RootLayout({
   };
 
   return (
-    <html lang={locale} className={`${playfair.variable} ${cormorant.variable} ${dmSans.variable} ${gheaGrapalat.variable}`} suppressHydrationWarning>
+    <html lang={locale} className={`${sourceSerif.variable} ${sourceSans.variable} ${gheaGrapalat.variable}`} suppressHydrationWarning>
       <body suppressHydrationWarning>
         <script
           type="application/ld+json"
