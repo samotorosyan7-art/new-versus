@@ -13,10 +13,9 @@ export default function AboutPage() {
   const galleryCaptions = t.raw('galleryCaptions') as string[];
   const videoCaptions = t.raw('videoCaptions') as string[];
 
-  // Photos live in /public/gallery-images. Mixed orientations (one wide team
-  // shot, two portraits) are handled by the Gallery's contain layout.
+  // Photos live in /public/gallery-images. Mixed orientations are handled
+  // by the Gallery's contain layout.
   const galleryImages = [
-    '/gallery-images/NZ5_0715.JPG',
     '/Vache-Simonyan-scaled.png',
     '/gallery-images/NZ5_0871.JPG',
     '/gallery-images/NZ5_0876.JPG',

@@ -7,7 +7,7 @@ export async function POST(req: Request) {
   try {
     const { password, fileName } = await req.json();
 
-    if (password !== 'admin1211') {
+    if (password !== (process.env.ADMIN_PASSWORD || 'admin1211')) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
@@ -24,6 +24,7 @@ export async function POST(req: Request) {
       excerpt: data.excerpt || '',
       content: content.trim(),
       order: typeof data.order === 'number' ? data.order : '',
+      image: data.image || '',
     });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });

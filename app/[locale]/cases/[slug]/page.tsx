@@ -5,6 +5,7 @@ import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import ImagePlaceholder from '@/components/ImagePlaceholder';
 import ConsultationButton from '@/components/ConsultationButton';
+import MoreInsights from '@/components/MoreInsights';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Link } from '@/navigation';
 import ReactMarkdown from 'react-markdown';
@@ -93,6 +94,8 @@ export default async function InsightPostPage({ params }: Props) {
           <div className="case-detail-cta">
             <ConsultationButton label={th('cta')} />
           </div>
+
+          <MoreInsights locale={locale} currentSlug={slug} />
         </article>
       </div>
       <Footer />

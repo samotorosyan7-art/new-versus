@@ -8,6 +8,7 @@ type PostMeta = {
   tag: string;
   locale: string;
   order: number | null;
+  image: string;
 };
 
 export default function AdminPage() {
@@ -26,13 +27,14 @@ export default function AdminPage() {
   const [order, setOrder] = useState('');
   const [locale, setLocale] = useState('en');
   const [status, setStatus] = useState('');
+  const [image, setImage] = useState('');
+  const [isUploadingImage, setIsUploadingImage] = useState(false);
 
   useEffect(() => {
     // Check localStorage on mount
     const savedCode = localStorage.getItem('adminAuthCode');
-    if (savedCode === 'admin1211') {
-      setIsLoggedIn(true);
-      fetchPosts('admin1211');
+    if (savedCode) {
+      attemptLogin(savedCode);
     }
   }, []);
 
@@ -53,15 +55,35 @@ export default function AdminPage() {
     setIsLoadingPosts(false);
   };
 
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (password === 'admin1211' || password === 'admin') { // Keeping username/pass prompt simple
-      localStorage.setItem('adminAuthCode', 'admin1211');
-      setIsLoggedIn(true);
-      fetchPosts('admin1211');
-    } else {
-      alert('Invalid credentials');
+  // Validates the password against the server (not a client-side constant),
+  // since the real password lives in ADMIN_PASSWORD on the server.
+  const attemptLogin = async (pass: string): Promise<boolean> => {
+    setIsLoadingPosts(true);
+    try {
+      const res = await fetch('/api/admin/list', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: pass })
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setPosts(data.posts || []);
+        setIsLoggedIn(true);
+        localStorage.setItem('adminAuthCode', pass);
+        setIsLoadingPosts(false);
+        return true;
+      }
+    } catch {
+      // Error validating login
     }
+    setIsLoadingPosts(false);
+    return false;
+  };
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const ok = await attemptLogin(password);
+    if (!ok) alert('Invalid credentials');
   };
 
   const loadPost = async (fileName: string, postLocale: string) => {
@@ -81,6 +103,7 @@ export default function AdminPage() {
         setExcerpt(data.excerpt);
         setContent(data.content);
         setOrder(data.order === 0 || data.order ? String(data.order) : '');
+        setImage(data.image || '');
         setLocale(postLocale);
         setEditingFileName(fileName);
         setStatus('Loaded successfully.');
@@ -96,9 +119,41 @@ export default function AdminPage() {
     setExcerpt('');
     setContent('');
     setOrder('');
+    setImage('');
     setLocale('en');
     setStatus('New article mode.');
   }
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    e.target.value = ''; // allow re-selecting the same file later
+    if (!file) return;
+
+    setIsUploadingImage(true);
+    setStatus('Uploading image...');
+    const pass = localStorage.getItem('adminAuthCode') || '';
+    const slugHint = title || editingFileName || 'case';
+
+    try {
+      const formData = new FormData();
+      formData.append('password', pass);
+      formData.append('file', file);
+      formData.append('slug', slugHint);
+
+      const res = await fetch('/api/admin/upload', { method: 'POST', body: formData });
+      const data = await res.json();
+
+      if (res.ok) {
+        setImage(data.path);
+        setStatus('✅ ' + data.message);
+      } else {
+        setStatus('❌ Error: ' + data.error);
+      }
+    } catch {
+      setStatus('❌ Network error while uploading.');
+    }
+    setIsUploadingImage(false);
+  };
 
   const handleDelete = async (fileName: string) => {
     if (!confirm('Are you sure you want to delete this file completely?')) return;
@@ -131,7 +186,7 @@ export default function AdminPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          title, excerpt, content, order, password: pass, locale, oldFileName: editingFileName
+          title, excerpt, content, order, image, password: pass, locale, oldFileName: editingFileName
         }),
       });
       const data = await res.json();
@@ -189,12 +244,18 @@ export default function AdminPage() {
           {isLoadingPosts ? <p style={{ fontSize: '13px', color: 'var(--text-muted)' }}>Loading...</p> : null}
           {posts.map(post => (
             <div key={post.fileName} style={{ background: editingFileName === post.fileName ? 'var(--accent-dim)' : 'var(--bg)', border: '1px solid var(--border)', padding: '16px', borderRadius: 'var(--radius-sm)', marginBottom: '12px', transition: 'background 0.2s', position: 'relative' }}>
-              <div 
-                style={{ cursor: 'pointer' }}
+              <div
+                style={{ cursor: 'pointer', display: 'flex', gap: '12px' }}
                 onClick={() => loadPost(post.fileName, post.locale)}
               >
-                <div style={{ fontSize: '10px', color: 'var(--accent)', fontWeight: 'bold', marginBottom: '4px', textTransform: 'uppercase' }}>{post.locale.toUpperCase()} · {post.date}{post.order !== null ? ` · #${post.order}` : ''}</div>
-                <div style={{ fontWeight: '600', fontSize: '14px', marginBottom: '8px', lineHeight: 1.3 }}>{post.title}</div>
+                {post.image ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={post.image} alt="" style={{ width: '44px', height: '44px', objectFit: 'cover', borderRadius: 'var(--radius-sm)', flexShrink: 0 }} />
+                ) : null}
+                <div>
+                  <div style={{ fontSize: '10px', color: 'var(--accent)', fontWeight: 'bold', marginBottom: '4px', textTransform: 'uppercase' }}>{post.locale.toUpperCase()} · {post.date}{post.order !== null ? ` · #${post.order}` : ''}</div>
+                  <div style={{ fontWeight: '600', fontSize: '14px', marginBottom: '8px', lineHeight: 1.3 }}>{post.title}</div>
+                </div>
               </div>
               <button 
                 onClick={() => handleDelete(post.fileName)}
@@ -241,6 +302,27 @@ export default function AdminPage() {
                 required type="text" value={excerpt} onChange={e => setExcerpt(e.target.value)}
                 className="intake-input" placeholder="A one sentence summary..." style={{ marginBottom: 0 }}
               />
+            </div>
+
+            <div>
+              <label style={{ display: 'block', marginBottom: '8px', fontWeight: 'bold', fontSize: '13px' }}>Case Image</label>
+              {image ? (
+                <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '12px' }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={image} alt="" style={{ width: '120px', height: '80px', objectFit: 'cover', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border)' }} />
+                  <button type="button" onClick={() => setImage('')} style={{ background: 'none', border: 'none', color: '#ff4444', fontSize: '12px', cursor: 'pointer', fontWeight: 'bold' }}>
+                    Remove image
+                  </button>
+                </div>
+              ) : null}
+              <input
+                type="file" accept="image/jpeg,image/png,image/webp,image/gif"
+                onChange={handleImageUpload} disabled={isUploadingImage}
+                className="intake-input" style={{ marginBottom: 0 }}
+              />
+              <p style={{ color: 'var(--text-muted)', fontSize: '12px', marginTop: '6px' }}>
+                {isUploadingImage ? 'Uploading...' : 'Shown at the top of the case page. JPEG, PNG, WEBP, or GIF, under 1MB.'}
+              </p>
             </div>
 
             <div>

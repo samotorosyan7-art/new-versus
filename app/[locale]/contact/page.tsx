@@ -1,5 +1,4 @@
 'use client';
-import IntakeForm from '@/components/IntakeForm';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import { useTranslations } from 'next-intl';
@@ -62,8 +61,6 @@ export default function ContactPage() {
             ></iframe>
           </div>
         </section>
-
-        <IntakeForm />
       </div>
       <Footer />
 

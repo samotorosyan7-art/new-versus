@@ -151,12 +151,7 @@ export default function IntakeForm() {
 
   return (
     <section id="intake">
-      <div className="intake-copy reveal">
-        <p className="section-label">{t('label')}</p>
-        <p className="intake-sub">{t('sub')}</p>
-      </div>
-
-      <div className="intake-form-side reveal reveal-delay-2">
+      <div className="intake-form-side reveal">
         <div className="step-indicator">
           <div className={`step-dot${step === 0 ? ' active' : ''}`}></div>
           <div className={`step-dot${step === 1 ? ' active' : ''}`}></div>

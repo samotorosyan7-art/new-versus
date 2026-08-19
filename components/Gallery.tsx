@@ -104,14 +104,32 @@ export default function Gallery({ slides }: GalleryProps) {
       </div>
 
       {total > 1 && (
-        <div className="gallery-dots">
-          {slides.map((_, i) => (
+        <div className="gallery-thumbs">
+          {slides.map((slide, i) => (
             <button
               key={i}
-              className={`gallery-dot${i === index ? ' active' : ''}`}
+              className={`gallery-thumb${i === index ? ' active' : ''}`}
               onClick={() => goTo(i)}
-              aria-label={`Go to image ${i + 1}`}
-            />
+              aria-label={slide.type === 'video' ? `Go to video ${i + 1}` : `Go to image ${i + 1}`}
+            >
+              {slide.type === 'video' ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  className="gallery-thumb-img"
+                  src={`https://img.youtube.com/vi/${slide.videoId}/mqdefault.jpg`}
+                  alt=""
+                  loading="lazy"
+                />
+              ) : (
+                <Image
+                  className="gallery-thumb-img"
+                  src={slide.src!}
+                  alt=""
+                  fill
+                  sizes="120px"
+                />
+              )}
+            </button>
           ))}
         </div>
       )}

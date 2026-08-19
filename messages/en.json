@@ -54,7 +54,6 @@
     ],
     "galleryTitle": "Gallery",
     "galleryCaptions": [
-      "At the Versus Law Firm offices, Yerevan",
       "Founder Vache Simonyan",
       "Strategy and preparation",
       "Representation at every tier of the judiciary"
@@ -157,8 +156,6 @@
     ]
   },
   "IntakeForm": {
-    "label": "Start here",
-    "sub": "No forms. No friction. A brief conversation to understand your situation — so when we speak, we're already aligned.",
     "selectMatter": "Select your matter",
     "continue": "Continue",
     "back": "Back",
@@ -231,7 +228,10 @@
     "readMore": "Read",
     "featured": "Featured",
     "backToCases": "Back to Cases",
-    "noPostsFound": "No posts found."
+    "noPostsFound": "No posts found.",
+    "moreInsights": "More Insights",
+    "previousInsight": "Previous insight",
+    "nextInsight": "Next insight"
   },
   "Cases": {
     "label": "Case record",

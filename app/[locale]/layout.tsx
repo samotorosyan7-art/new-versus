@@ -30,6 +30,14 @@ const gheaGrapalat = localFont({
   display: 'swap',
 });
 
+const newYork = localFont({
+  src: [
+    { path: '../fonts/NewYork-Regular.otf', weight: '400', style: 'normal' },
+  ],
+  variable: '--font-new-york',
+  display: 'swap',
+});
+
 export async function generateMetadata({
   params
 }: {
@@ -129,7 +137,7 @@ export default async function RootLayout({
   };
 
   return (
-    <html lang={locale} className={`${sourceSerif.variable} ${sourceSans.variable} ${gheaGrapalat.variable}`} suppressHydrationWarning>
+    <html lang={locale} className={`${sourceSerif.variable} ${sourceSans.variable} ${gheaGrapalat.variable} ${newYork.variable}`} suppressHydrationWarning>
       <body suppressHydrationWarning>
         <script
           type="application/ld+json"
