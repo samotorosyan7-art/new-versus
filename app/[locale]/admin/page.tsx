@@ -19,10 +19,9 @@ type TranslationDraft = {
   title: string;
   excerpt: string;
   content: string;
-  order: string;
 };
 
-const emptyDraft = (): TranslationDraft => ({ title: '', excerpt: '', content: '', order: '' });
+const emptyDraft = (): TranslationDraft => ({ title: '', excerpt: '', content: '' });
 const emptyDrafts = (): Record<Locale, TranslationDraft> => ({ en: emptyDraft(), hy: emptyDraft(), ru: emptyDraft() });
 const noLocales = (): Record<Locale, boolean> => ({ en: false, hy: false, ru: false });
 
@@ -39,6 +38,7 @@ export default function AdminPage() {
   const [caseSlug, setCaseSlug] = useState('');
   const [slugLocked, setSlugLocked] = useState(false);
   const [caseImage, setCaseImage] = useState('');
+  const [caseOrder, setCaseOrder] = useState('');
   const [pendingImageFile, setPendingImageFile] = useState<File | null>(null);
   const [pendingImagePreview, setPendingImagePreview] = useState('');
   const [activeLocale, setActiveLocale] = useState<Locale>('en');
@@ -54,22 +54,6 @@ export default function AdminPage() {
       attemptLogin(savedCode);
     }
   }, []);
-
-  const fetchCases = async (pass: string) => {
-    setIsLoadingCases(true);
-    try {
-      const res = await fetch('/api/admin/list', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password: pass }),
-      });
-      const data = await res.json();
-      if (res.ok) setCases(data.cases || []);
-    } catch {
-      // Error fetching list
-    }
-    setIsLoadingCases(false);
-  };
 
   // Validates the password against the server (not a client-side constant),
   // since the real password lives in ADMIN_PASSWORD on the server.
@@ -110,6 +94,7 @@ export default function AdminPage() {
     setCaseSlug(summary.slug);
     setSlugLocked(true); // existing case: title edits must never silently change the slug
     setCaseImage('');
+    setCaseOrder('');
     clearPendingImage();
     setDrafts(emptyDrafts());
     setCaseLocalesExist(noLocales());
@@ -133,20 +118,22 @@ export default function AdminPage() {
       const nextDrafts = emptyDrafts();
       const nextExist = noLocales();
       let sharedImage = '';
+      let sharedOrder = '';
       for (const r of results) {
         if (!r.ok) continue;
         nextDrafts[r.locale] = {
           title: r.data.title,
           excerpt: r.data.excerpt,
           content: r.data.content,
-          order: r.data.order === 0 || r.data.order ? String(r.data.order) : '',
         };
         nextExist[r.locale] = true;
         if (!sharedImage && r.data.image) sharedImage = r.data.image;
+        if (!sharedOrder && (r.data.order === 0 || r.data.order)) sharedOrder = String(r.data.order);
       }
       setDrafts(nextDrafts);
       setCaseLocalesExist(nextExist);
       setCaseImage(sharedImage);
+      setCaseOrder(sharedOrder);
       setActiveLocale(existingLocales[0] || 'en');
       setStatus('');
     } catch {
@@ -173,7 +160,10 @@ export default function AdminPage() {
 
   const handleTitleChange = (value: string) => {
     updateDraft({ title: value });
-    if (!slugLocked) {
+    // The slug is the case's canonical URL, so it's always derived from the English
+    // title specifically — not whichever locale tab happens to be open — so it stays
+    // a stable, readable Latin URL regardless of which language gets filled in first.
+    if (!slugLocked && activeLocale === 'en') {
       setCaseSlug(slugify(value));
     }
   };
@@ -214,19 +204,32 @@ export default function AdminPage() {
     const label = existingLocales.map((l) => l.toUpperCase()).join(', ') || 'no saved translations';
     if (!confirm(`Delete this entire case (${label})? This cannot be undone.`)) return;
 
+    if (existingLocales.length === 0) {
+      handleNew();
+      return;
+    }
+
     setStatus('Deleting...');
     const pass = localStorage.getItem('adminAuthCode') || '';
+    const slugToDelete = selectedSlug;
     try {
-      for (const l of existingLocales) {
-        await fetch('/api/admin/delete', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ password: pass, fileName: `${selectedSlug}.${l}.mdx` }),
-        });
+      // Deletes every translation as one request/commit, so removing a case
+      // triggers a single deploy instead of one per translation.
+      const res = await fetch('/api/admin/delete', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: pass, fileNames: existingLocales.map((l) => `${slugToDelete}.${l}.mdx`) }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setStatus(`❌ Error: ${data.error}`);
+        return;
       }
       setStatus('Deleted successfully.');
+      // Drop it from the sidebar immediately — in production the list endpoint reads
+      // the local filesystem, which still shows the deleted case until the site redeploys.
+      setCases((prev) => prev.filter((c) => c.slug !== slugToDelete));
       handleNew();
-      fetchCases(pass);
     } catch {
       setStatus('❌ Network error while deleting.');
     }
@@ -267,68 +270,67 @@ export default function AdminPage() {
     const pass = localStorage.getItem('adminAuthCode') || '';
 
     try {
-      let imageToSave = caseImage;
-      if (pendingImageFile) {
-        setStatus('Uploading image...');
-        const formData = new FormData();
-        formData.append('password', pass);
-        formData.append('file', pendingImageFile);
-        formData.append('slug', finalSlug);
+      const translations: Record<string, TranslationDraft> = {};
+      for (const l of localesToSave) translations[l] = drafts[l];
 
-        const uploadRes = await fetch('/api/admin/upload', { method: 'POST', body: formData });
-        const uploadData = await uploadRes.json();
-        if (!uploadRes.ok) {
-          setStatus('❌ Error uploading image: ' + uploadData.error);
-          setIsSaving(false);
-          return;
-        }
-        imageToSave = uploadData.path;
+      // Image, all locale translations, and any rename/redirect bookkeeping go in
+      // a single request so production writes land as one GitHub commit — one
+      // deploy per case save instead of one per file.
+      const formData = new FormData();
+      formData.append('password', pass);
+      formData.append('slug', finalSlug);
+      formData.append('previousSlug', selectedSlug || '');
+      formData.append('image', caseImage);
+      formData.append('order', caseOrder);
+      formData.append('translations', JSON.stringify(translations));
+      if (pendingImageFile) formData.append('file', pendingImageFile);
+
+      const res = await fetch('/api/admin/save', { method: 'POST', body: formData });
+      const data = await res.json();
+      if (!res.ok) {
+        setStatus(`❌ Error: ${data.error}`);
+        setIsSaving(false);
+        return;
       }
 
-      setStatus('Saving...');
-      let lastMessage = '';
-      for (const l of localesToSave) {
-        const d = drafts[l];
-        const res = await fetch('/api/admin/save', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            title: d.title,
-            excerpt: d.excerpt,
-            content: d.content,
-            order: d.order,
-            image: imageToSave,
-            password: pass,
-            locale: l,
-            slug: finalSlug,
-            previousSlug: selectedSlug,
-          }),
-        });
-        const data = await res.json();
-        if (!res.ok) {
-          setStatus(`❌ Error (${LOCALE_LABELS[l]}): ${data.error}`);
-          setIsSaving(false);
-          return;
-        }
-        lastMessage = data.message;
-      }
-
-      setStatus('✅ ' + lastMessage);
+      setStatus('✅ ' + data.message);
       setSelectedSlug(finalSlug);
       setCaseSlug(finalSlug);
       setSlugLocked(true);
-      setCaseImage(imageToSave);
+      setCaseImage(data.image);
       // Don't switch the preview to the new remote URL yet — in production the upload
       // lands via a GitHub commit and isn't actually live until the site redeploys
       // (~1-2 min), so showing it immediately would 404. Keep showing the local
       // preview for the rest of this session; it'll load from the server next time.
       setPendingImageFile(null);
-      setCaseLocalesExist((prev) => {
-        const next = { ...prev };
-        localesToSave.forEach((l) => { next[l] = true; });
+      const finalLocalesExist = { ...caseLocalesExist };
+      localesToSave.forEach((l) => { finalLocalesExist[l] = true; });
+      setCaseLocalesExist(finalLocalesExist);
+
+      // Update the sidebar entry from what was just saved instead of re-fetching —
+      // in production the list endpoint reads the local filesystem, which won't
+      // reflect this save until the site redeploys, so a fetch here would make the
+      // new/edited case briefly vanish or look stale.
+      const preferredDraft = drafts.en.title.trim() ? drafts.en : drafts.hy.title.trim() ? drafts.hy : drafts.ru;
+      const parsedOrder = caseOrder !== '' ? Number(caseOrder) : NaN;
+      const summary: CaseSummary = {
+        slug: finalSlug,
+        title: preferredDraft.title.trim() || finalSlug,
+        date: new Date().toISOString().split('T')[0],
+        order: Number.isNaN(parsedOrder) ? null : parsedOrder,
+        image: data.image || '',
+        locales: LOCALES.map((l) => ({ locale: l, exists: !!finalLocalesExist[l] })),
+      };
+      setCases((prev) => {
+        const next = [...prev.filter((c) => c.slug !== selectedSlug && c.slug !== finalSlug), summary];
+        next.sort((a, b) => {
+          const ao = a.order ?? Number.POSITIVE_INFINITY;
+          const bo = b.order ?? Number.POSITIVE_INFINITY;
+          if (ao !== bo) return ao - bo;
+          return new Date(b.date).getTime() - new Date(a.date).getTime();
+        });
         return next;
       });
-      fetchCases(pass);
     } catch {
       setStatus('❌ Network error while saving.');
     }
@@ -443,6 +445,17 @@ export default function AdminPage() {
             </p>
           </div>
 
+          <div style={{ marginBottom: '32px' }}>
+            <label style={{ display: 'block', marginBottom: '8px', fontWeight: 'bold', fontSize: '13px' }}>Display Order (shared across all languages)</label>
+            <input
+              type="number" value={caseOrder} onChange={e => setCaseOrder(e.target.value)}
+              className="intake-input" placeholder="e.g. 1 — lower numbers appear first" style={{ marginBottom: 0 }}
+            />
+            <p style={{ color: 'var(--text-muted)', fontSize: '12px', marginTop: '6px' }}>
+              Controls the order on the Cases page. Lower numbers appear first; leave blank to fall back to newest-first.
+            </p>
+          </div>
+
           {/* LOCALE TABS */}
           <div style={{ display: 'flex', gap: '4px', marginBottom: '32px', borderBottom: '1px solid var(--border)' }}>
             {LOCALES.map(locale => (
@@ -482,17 +495,6 @@ export default function AdminPage() {
                   type="text" value={draft.excerpt} onChange={e => updateDraft({ excerpt: e.target.value })}
                   className="intake-input" placeholder="A one sentence summary..." style={{ marginBottom: 0 }}
                 />
-              </div>
-
-              <div>
-                <label style={{ display: 'block', marginBottom: '8px', fontWeight: 'bold', fontSize: '13px' }}>Display Order</label>
-                <input
-                  type="number" value={draft.order} onChange={e => updateDraft({ order: e.target.value })}
-                  className="intake-input" placeholder="e.g. 1 — lower numbers appear first" style={{ marginBottom: 0 }}
-                />
-                <p style={{ color: 'var(--text-muted)', fontSize: '12px', marginTop: '6px' }}>
-                  Controls the order on the Cases page. Lower numbers appear first; leave blank to fall back to newest-first.
-                </p>
               </div>
 
               <div>

@@ -1,7 +1,7 @@
 const GITHUB_OWNER = 'samotorosyan7-art';
 const GITHUB_REPO = 'new-versus';
 const GITHUB_BRANCH = 'main';
-const API_BASE = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents`;
+const GIT_API_BASE = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/git`;
 
 const COMMIT_AUTHOR = {
   name: 'Versus Admin Panel',
@@ -24,58 +24,67 @@ function authHeaders() {
   };
 }
 
-async function getFileSha(repoPath: string): Promise<string | null> {
-  const res = await fetch(`${API_BASE}/${repoPath}?ref=${GITHUB_BRANCH}`, {
-    headers: authHeaders(),
-    cache: 'no-store',
-  });
-  if (res.status === 404) return null;
-  if (!res.ok) throw new Error(`GitHub API error (${res.status}): ${await res.text()}`);
-  const data = await res.json();
-  return data.sha as string;
-}
-
-async function putContent(repoPath: string, base64Content: string, message: string) {
-  const sha = await getFileSha(repoPath);
-  const res = await fetch(`${API_BASE}/${repoPath}`, {
-    method: 'PUT',
-    headers: authHeaders(),
-    body: JSON.stringify({
-      message,
-      content: base64Content,
-      branch: GITHUB_BRANCH,
-      committer: COMMIT_AUTHOR,
-      author: COMMIT_AUTHOR,
-      ...(sha ? { sha } : {}),
-    }),
-  });
+async function githubRequest(url: string, init?: RequestInit) {
+  const res = await fetch(url, { ...init, headers: authHeaders(), cache: 'no-store' });
   if (!res.ok) throw new Error(`GitHub API error (${res.status}): ${await res.text()}`);
   return res.json();
 }
 
-export async function commitFile(repoPath: string, content: string, message: string) {
-  return putContent(repoPath, Buffer.from(content, 'utf8').toString('base64'), message);
-}
+export type FileChange = {
+  path: string;
+  content: string;
+  /** 'utf-8' for text content (mdx, json); 'base64' for binary content (images). */
+  encoding: 'utf-8' | 'base64';
+};
 
-// For binary files (e.g. uploaded images) whose content is already base64-encoded.
-export async function commitBinaryFile(repoPath: string, base64Content: string, message: string) {
-  return putContent(repoPath, base64Content, message);
-}
+/**
+ * Writes and/or deletes several files as a single commit against the Git Data API,
+ * so a save that touches multiple locale files (and maybe an image) triggers exactly
+ * one push — and one deploy — instead of one per file.
+ */
+export async function commitFiles(changes: FileChange[], deletions: string[], message: string) {
+  if (changes.length === 0 && deletions.length === 0) return null;
 
-export async function deleteFile(repoPath: string, message: string) {
-  const sha = await getFileSha(repoPath);
-  if (!sha) return { skipped: true };
-  const res = await fetch(`${API_BASE}/${repoPath}`, {
-    method: 'DELETE',
-    headers: authHeaders(),
+  const ref = await githubRequest(`${GIT_API_BASE}/ref/heads/${GITHUB_BRANCH}`);
+  const latestCommitSha = ref.object.sha as string;
+
+  const latestCommit = await githubRequest(`${GIT_API_BASE}/commits/${latestCommitSha}`);
+  const baseTreeSha = latestCommit.tree.sha as string;
+
+  const changeEntries = await Promise.all(
+    changes.map(async (change) => {
+      if (change.encoding === 'utf-8') {
+        return { path: change.path, mode: '100644', type: 'blob', content: change.content };
+      }
+      const blob = await githubRequest(`${GIT_API_BASE}/blobs`, {
+        method: 'POST',
+        body: JSON.stringify({ content: change.content, encoding: 'base64' }),
+      });
+      return { path: change.path, mode: '100644', type: 'blob', sha: blob.sha as string };
+    })
+  );
+  const deletionEntries = deletions.map((path) => ({ path, mode: '100644', type: 'blob', sha: null }));
+
+  const newTree = await githubRequest(`${GIT_API_BASE}/trees`, {
+    method: 'POST',
+    body: JSON.stringify({ base_tree: baseTreeSha, tree: [...changeEntries, ...deletionEntries] }),
+  });
+
+  const newCommit = await githubRequest(`${GIT_API_BASE}/commits`, {
+    method: 'POST',
     body: JSON.stringify({
       message,
-      sha,
-      branch: GITHUB_BRANCH,
-      committer: COMMIT_AUTHOR,
+      tree: newTree.sha,
+      parents: [latestCommitSha],
       author: COMMIT_AUTHOR,
+      committer: COMMIT_AUTHOR,
     }),
   });
-  if (!res.ok) throw new Error(`GitHub API error (${res.status}): ${await res.text()}`);
-  return res.json();
+
+  await githubRequest(`${GIT_API_BASE}/refs/heads/${GITHUB_BRANCH}`, {
+    method: 'PATCH',
+    body: JSON.stringify({ sha: newCommit.sha }),
+  });
+
+  return newCommit;
 }

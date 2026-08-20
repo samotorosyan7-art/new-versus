@@ -1722,7 +1722,7 @@ nav.scrolled .logo-img {
 }
 
 .media-frame-img {
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .media-frame-placeholder {

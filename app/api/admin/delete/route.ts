@@ -1,32 +1,35 @@
 import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
-import { deleteFile, isProductionRuntime } from '@/lib/github-content';
+import { commitFiles, isProductionRuntime } from '@/lib/github-content';
+
+const CONTENT_DIR = path.join(process.cwd(), 'content', 'insights');
 
 export async function POST(req: Request) {
   try {
-    const { password, fileName } = await req.json();
+    const { password, fileNames } = await req.json();
 
     if (password !== (process.env.ADMIN_PASSWORD || 'admin1211')) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    if (!fileName) {
-        return NextResponse.json({ error: 'Filename missing' }, { status: 400 });
+    const names: string[] = Array.isArray(fileNames) ? fileNames.filter((n) => typeof n === 'string') : [];
+    if (names.length === 0) {
+      return NextResponse.json({ error: 'No files specified' }, { status: 400 });
     }
 
     if (isProductionRuntime()) {
-      await deleteFile(`content/insights/${fileName}`, `Delete insight: ${fileName}`);
+      // Delete every locale file for this case as one commit, so a case delete
+      // triggers exactly one deploy instead of one per translation.
+      await commitFiles([], names.map((n) => `content/insights/${n}`), `Delete case: ${names.join(', ')}`);
       return NextResponse.json({ success: true, message: 'Deleted! Live in ~1-2 minutes once the site redeploys.' });
     }
 
-    const fullPath = path.join(process.cwd(), 'content', 'insights', fileName);
-    if (fs.existsSync(fullPath)) {
-      fs.unlinkSync(fullPath);
-      return NextResponse.json({ success: true, message: 'Deleted successfully' });
+    for (const fileName of names) {
+      const fullPath = path.join(CONTENT_DIR, fileName);
+      if (fs.existsSync(fullPath)) fs.unlinkSync(fullPath);
     }
-
-    return NextResponse.json({ error: 'File not found' }, { status: 404 });
+    return NextResponse.json({ success: true, message: 'Deleted successfully' });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
