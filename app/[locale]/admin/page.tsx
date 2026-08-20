@@ -39,12 +39,14 @@ export default function AdminPage() {
   const [caseSlug, setCaseSlug] = useState('');
   const [slugLocked, setSlugLocked] = useState(false);
   const [caseImage, setCaseImage] = useState('');
+  const [pendingImageFile, setPendingImageFile] = useState<File | null>(null);
+  const [pendingImagePreview, setPendingImagePreview] = useState('');
   const [activeLocale, setActiveLocale] = useState<Locale>('en');
   const [drafts, setDrafts] = useState<Record<Locale, TranslationDraft>>(emptyDrafts());
   const [caseLocalesExist, setCaseLocalesExist] = useState<Record<Locale, boolean>>(noLocales());
   const [isLoadingCase, setIsLoadingCase] = useState(false);
   const [status, setStatus] = useState('');
-  const [isUploadingImage, setIsUploadingImage] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
     const savedCode = localStorage.getItem('adminAuthCode');
@@ -108,6 +110,7 @@ export default function AdminPage() {
     setCaseSlug(summary.slug);
     setSlugLocked(true); // existing case: title edits must never silently change the slug
     setCaseImage('');
+    clearPendingImage();
     setDrafts(emptyDrafts());
     setCaseLocalesExist(noLocales());
 
@@ -157,6 +160,7 @@ export default function AdminPage() {
     setCaseSlug('');
     setSlugLocked(false);
     setCaseImage('');
+    clearPendingImage();
     setActiveLocale('en');
     setDrafts(emptyDrafts());
     setCaseLocalesExist(noLocales());
@@ -179,35 +183,29 @@ export default function AdminPage() {
     setCaseSlug(value);
   };
 
-  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  // The image file is only staged locally — it's uploaded to the server as part of
+  // the single "Save Case" action, not as its own separate server action.
+  const clearPendingImage = () => {
+    setPendingImageFile(null);
+    setPendingImagePreview((prev) => {
+      if (prev) URL.revokeObjectURL(prev);
+      return '';
+    });
+  };
+
+  const handleImageSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     e.target.value = ''; // allow re-selecting the same file later
     if (!file) return;
 
-    setIsUploadingImage(true);
-    setStatus('Uploading image...');
-    const pass = localStorage.getItem('adminAuthCode') || '';
-    const slugHint = caseSlug || drafts[activeLocale].title || 'case';
+    clearPendingImage();
+    setPendingImageFile(file);
+    setPendingImagePreview(URL.createObjectURL(file));
+  };
 
-    try {
-      const formData = new FormData();
-      formData.append('password', pass);
-      formData.append('file', file);
-      formData.append('slug', slugHint);
-
-      const res = await fetch('/api/admin/upload', { method: 'POST', body: formData });
-      const data = await res.json();
-
-      if (res.ok) {
-        setCaseImage(data.path);
-        setStatus('✅ ' + data.message);
-      } else {
-        setStatus('❌ Error: ' + data.error);
-      }
-    } catch {
-      setStatus('❌ Network error while uploading.');
-    }
-    setIsUploadingImage(false);
+  const handleRemoveImage = () => {
+    clearPendingImage();
+    setCaseImage('');
   };
 
   const handleDeleteCase = async () => {
@@ -264,10 +262,30 @@ export default function AdminPage() {
       if (!ok) return;
     }
 
+    setIsSaving(true);
     setStatus('Saving...');
     const pass = localStorage.getItem('adminAuthCode') || '';
 
     try {
+      let imageToSave = caseImage;
+      if (pendingImageFile) {
+        setStatus('Uploading image...');
+        const formData = new FormData();
+        formData.append('password', pass);
+        formData.append('file', pendingImageFile);
+        formData.append('slug', finalSlug);
+
+        const uploadRes = await fetch('/api/admin/upload', { method: 'POST', body: formData });
+        const uploadData = await uploadRes.json();
+        if (!uploadRes.ok) {
+          setStatus('❌ Error uploading image: ' + uploadData.error);
+          setIsSaving(false);
+          return;
+        }
+        imageToSave = uploadData.path;
+      }
+
+      setStatus('Saving...');
       let lastMessage = '';
       for (const l of localesToSave) {
         const d = drafts[l];
@@ -279,7 +297,7 @@ export default function AdminPage() {
             excerpt: d.excerpt,
             content: d.content,
             order: d.order,
-            image: caseImage,
+            image: imageToSave,
             password: pass,
             locale: l,
             slug: finalSlug,
@@ -289,6 +307,7 @@ export default function AdminPage() {
         const data = await res.json();
         if (!res.ok) {
           setStatus(`❌ Error (${LOCALE_LABELS[l]}): ${data.error}`);
+          setIsSaving(false);
           return;
         }
         lastMessage = data.message;
@@ -298,6 +317,12 @@ export default function AdminPage() {
       setSelectedSlug(finalSlug);
       setCaseSlug(finalSlug);
       setSlugLocked(true);
+      setCaseImage(imageToSave);
+      // Don't switch the preview to the new remote URL yet — in production the upload
+      // lands via a GitHub commit and isn't actually live until the site redeploys
+      // (~1-2 min), so showing it immediately would 404. Keep showing the local
+      // preview for the rest of this session; it'll load from the server next time.
+      setPendingImageFile(null);
       setCaseLocalesExist((prev) => {
         const next = { ...prev };
         localesToSave.forEach((l) => { next[l] = true; });
@@ -307,6 +332,7 @@ export default function AdminPage() {
     } catch {
       setStatus('❌ Network error while saving.');
     }
+    setIsSaving(false);
   };
 
   const handleLogout = () => {
@@ -398,22 +424,22 @@ export default function AdminPage() {
 
           <div style={{ marginBottom: '32px' }}>
             <label style={{ display: 'block', marginBottom: '8px', fontWeight: 'bold', fontSize: '13px' }}>Case Image (shared across all languages)</label>
-            {caseImage ? (
+            {(pendingImagePreview || caseImage) ? (
               <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '12px' }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={caseImage} alt="" style={{ width: '120px', height: '80px', objectFit: 'cover', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border)' }} />
-                <button type="button" onClick={() => setCaseImage('')} style={{ background: 'none', border: 'none', color: '#ff4444', fontSize: '12px', cursor: 'pointer', fontWeight: 'bold' }}>
+                <img src={pendingImagePreview || caseImage} alt="" style={{ width: '120px', height: '80px', objectFit: 'cover', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border)' }} />
+                <button type="button" onClick={handleRemoveImage} style={{ background: 'none', border: 'none', color: '#ff4444', fontSize: '12px', cursor: 'pointer', fontWeight: 'bold' }}>
                   Remove image
                 </button>
               </div>
             ) : null}
             <input
               type="file" accept="image/jpeg,image/png,image/webp,image/gif"
-              onChange={handleImageUpload} disabled={isUploadingImage}
+              onChange={handleImageSelect} disabled={isSaving}
               className="intake-input" style={{ marginBottom: 0 }}
             />
             <p style={{ color: 'var(--text-muted)', fontSize: '12px', marginTop: '6px' }}>
-              {isUploadingImage ? 'Uploading...' : 'Shown at the top of the case page in every language. JPEG, PNG, WEBP, or GIF, under 1MB.'}
+              {pendingImageFile ? 'Selected — will upload when you save.' : 'Shown at the top of the case page in every language. JPEG, PNG, WEBP, or GIF, under 1MB.'}
             </p>
           </div>
 
@@ -478,7 +504,7 @@ export default function AdminPage() {
               </div>
 
               <div style={{ display: 'flex', alignItems: 'center', gap: '24px', flexWrap: 'wrap' }}>
-                <button type="submit" className="primary-btn">
+                <button type="submit" className="primary-btn" disabled={isSaving}>
                   Save Case
                 </button>
                 {status && <span style={{ fontWeight: 'bold', color: status.includes('❌') ? '#ff4444' : 'var(--accent)', fontSize: '14px' }}>{status}</span>}
