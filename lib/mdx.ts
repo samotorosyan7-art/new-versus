@@ -66,21 +66,22 @@ export function getAllInsights(locale: string): InsightMeta[] {
   });
 }
 
-/** Returns a single insight post with full MDX content string */
+/** Returns a single insight post with full MDX content string. Falls back to whichever
+ * other locale is available for the same slug, so a case missing one translation still
+ * opens instead of 404ing. */
 export function getInsightBySlug(slug: string, locale: string): Insight | null {
-  const fileName = `${slug}.${locale}.mdx`;
-  const fullPath = path.join(CONTENT_DIR, fileName);
+  const candidateLocales = [locale, 'en', 'hy', 'ru'].filter((l, i, arr) => arr.indexOf(l) === i);
 
-  if (!fs.existsSync(fullPath)) {
-    // Try fallback to 'en' locale
-    const enPath = path.join(CONTENT_DIR, `${slug}.en.mdx`);
-    if (!fs.existsSync(enPath)) return null;
+  for (const candidateLocale of candidateLocales) {
+    const fullPath = path.join(CONTENT_DIR, `${slug}.${candidateLocale}.mdx`);
+    if (!fs.existsSync(fullPath)) continue;
 
-    const raw = fs.readFileSync(enPath, 'utf-8');
+    const raw = fs.readFileSync(fullPath, 'utf-8');
     const { data, content } = matter(raw);
+
     return {
       slug,
-      locale: 'en',
+      locale: candidateLocale,
       title: data.title ?? '',
       date: data.date ?? '',
       tag: data.tag ?? 'Insight',
@@ -92,21 +93,7 @@ export function getInsightBySlug(slug: string, locale: string): Insight | null {
     };
   }
 
-  const raw = fs.readFileSync(fullPath, 'utf-8');
-  const { data, content } = matter(raw);
-
-  return {
-    slug,
-    locale,
-    title: data.title ?? '',
-    date: data.date ?? '',
-    tag: data.tag ?? 'Insight',
-    excerpt: data.excerpt ?? '',
-    isFeatured: data.isFeatured ?? false,
-    order: typeof data.order === 'number' ? data.order : undefined,
-    image: data.image ?? undefined,
-    content,
-  };
+  return null;
 }
 
 /** All unique slugs (for static params generation) */
@@ -122,4 +109,32 @@ export function getAllInsightSlugs(): { slug: string }[] {
   }
 
   return Array.from(slugSet).map((slug) => ({ slug }));
+}
+
+const REDIRECTS_PATH = path.join(process.cwd(), 'content', 'insight-redirects.json');
+
+/** Maps an old case slug to the slug it was renamed to from the admin panel. */
+export function getInsightRedirects(): Record<string, string> {
+  if (!fs.existsSync(REDIRECTS_PATH)) return {};
+  try {
+    return JSON.parse(fs.readFileSync(REDIRECTS_PATH, 'utf-8'));
+  } catch {
+    return {};
+  }
+}
+
+/** Follows a chain of renames to the slug's current location, or null if it was never renamed. */
+export function resolveInsightRedirect(slug: string): string | null {
+  const redirects = getInsightRedirects();
+  const seen = new Set([slug]);
+  let current = slug;
+  let target: string | null = null;
+
+  while (redirects[current] && !seen.has(redirects[current])) {
+    current = redirects[current];
+    seen.add(current);
+    target = current;
+  }
+
+  return target;
 }

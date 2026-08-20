@@ -1,13 +1,13 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getInsightBySlug, getAllInsightSlugs } from '@/lib/mdx';
+import { getInsightBySlug, getAllInsightSlugs, resolveInsightRedirect } from '@/lib/mdx';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import ImagePlaceholder from '@/components/ImagePlaceholder';
 import ConsultationButton from '@/components/ConsultationButton';
 import MoreInsights from '@/components/MoreInsights';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import { Link } from '@/navigation';
+import { Link, permanentRedirect } from '@/navigation';
 import ReactMarkdown from 'react-markdown';
 import { pageMetadata, SITE_NAME } from '@/lib/seo';
 import { routing } from '@/navigation';
@@ -25,7 +25,16 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
-  const post = getInsightBySlug(slug, locale);
+  let post = getInsightBySlug(slug, locale);
+  let canonicalSlug = slug;
+
+  if (!post) {
+    const redirectSlug = resolveInsightRedirect(slug);
+    if (redirectSlug) {
+      canonicalSlug = redirectSlug;
+      post = getInsightBySlug(redirectSlug, locale);
+    }
+  }
 
   if (!post) {
     return { title: 'Not found', robots: { index: false, follow: false } };
@@ -33,7 +42,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return pageMetadata({
     locale,
-    path: `/cases/${slug}`,
+    path: `/cases/${canonicalSlug}`,
     title: post.title,
     description: post.excerpt || `${post.title} — ${SITE_NAME}`,
     type: 'article',
@@ -48,6 +57,12 @@ export default async function InsightPostPage({ params }: Props) {
   const th = await getTranslations('Hero');
 
   if (!post) {
+    // The case may have been renamed from the admin panel — send old links/bookmarks
+    // to the new slug instead of a dead page.
+    const redirectSlug = resolveInsightRedirect(slug);
+    if (redirectSlug) {
+      permanentRedirect({ href: `/cases/${redirectSlug}`, locale });
+    }
     notFound();
   }
 
