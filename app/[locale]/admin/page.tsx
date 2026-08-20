@@ -313,12 +313,17 @@ export default function AdminPage() {
       // new/edited case briefly vanish or look stale.
       const preferredDraft = drafts.en.title.trim() ? drafts.en : drafts.hy.title.trim() ? drafts.hy : drafts.ru;
       const parsedOrder = caseOrder !== '' ? Number(caseOrder) : NaN;
+      // If a new image was just uploaded, its remote path won't 404 until the site
+      // redeploys (~1-2 min) — show a local blob preview in the sidebar instead of a
+      // broken thumbnail. Create a dedicated object URL (not the shared editor preview
+      // one) so it survives switching to another case, which revokes that one.
+      const sidebarImage = pendingImageFile ? URL.createObjectURL(pendingImageFile) : (data.image || '');
       const summary: CaseSummary = {
         slug: finalSlug,
         title: preferredDraft.title.trim() || finalSlug,
         date: new Date().toISOString().split('T')[0],
         order: Number.isNaN(parsedOrder) ? null : parsedOrder,
-        image: data.image || '',
+        image: sidebarImage,
         locales: LOCALES.map((l) => ({ locale: l, exists: !!finalLocalesExist[l] })),
       };
       setCases((prev) => {

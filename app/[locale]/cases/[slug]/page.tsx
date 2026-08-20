@@ -96,10 +96,6 @@ export default async function InsightPostPage({ params }: Props) {
             </div>
 
             <div className="case-hero-text">
-              {post.excerpt && (
-                <p className="blog-reading-excerpt">{post.excerpt}</p>
-              )}
-
               <div className="prose case-detail-body">
                 <ReactMarkdown>{post.content}</ReactMarkdown>
               </div>
