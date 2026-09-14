@@ -76,6 +76,7 @@ h1, h2, h3, h4,
 
 p {
   text-wrap: pretty;
+  text-align: justify;
 }
 
 body {
@@ -1344,6 +1345,7 @@ nav.scrolled .logo-img {
   font-weight: 700;
   color: var(--text);
   margin: 0 0 12px;
+  text-align: center;
 }
 
 .consult-success-sub {
@@ -1351,6 +1353,7 @@ nav.scrolled .logo-img {
   line-height: 1.8;
   color: var(--text-muted);
   margin: 0;
+  text-align: center;
 }
 
 /* ── BLOG GRID ── */
@@ -2863,6 +2866,7 @@ footer::before {
   font-weight: 700;
   line-height: 1;
   color: var(--accent);
+  text-align: center;
 }
 
 .not-found-title {
@@ -2878,4 +2882,5 @@ footer::before {
   color: var(--text-muted);
   max-width: 480px;
   margin-bottom: 12px;
+  text-align: center;
 }
